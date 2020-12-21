@@ -15,3 +15,4 @@
 
 
 ## Flow Chart
+![FlowChart](/etc/flowchart.png)
