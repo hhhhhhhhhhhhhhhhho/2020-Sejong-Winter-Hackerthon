@@ -1,7 +1,7 @@
 import sys
 import clipboard
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QMessageBox, QFrame
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
@@ -14,8 +14,8 @@ class MyApp(QWidget):
         self.widget_title = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_title(self.widget_title)
 
-        self.widget_info = QWidget(parent=self, flags=Qt.Widget)
-        self.init_widget_info()
+        self.frame_info = QFrame()
+        self.init_frame_info()
 
         self.widget_cam = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_cam()
@@ -24,16 +24,17 @@ class MyApp(QWidget):
 
     def init_widget_title(self, w):
 
-        #self.widget_title.setStyleSheet("background-color: white")
-
+        self.widget_title.setStyleSheet("background-color: rgb(240, 240, 240)")
 
         w.label_title = QLabel('I See You', w)
+        w.label_title.setStyleSheet("Color: rgb(110, 110, 110)")
         font = w.label_title.font()
         font.setPointSize(20)
         font.setBold(True)
         w.label_title.setFont(font)
 
         w.label_ID = QLabel('17011477 목승주', w)
+        w.label_ID.setStyleSheet("Color: rgb(50, 50, 50)")
 
         w.hbox_title = QHBoxLayout()
         w.hbox_title.addWidget(w.label_title)
@@ -43,38 +44,40 @@ class MyApp(QWidget):
         w.setLayout(w.hbox_title)
 
 
-    def init_widget_info(self):
+    def init_frame_info(self):
+        self.frame_info.setFrameShape(QFrame.Box)
+        self.frame_info.setFrameShadow(QFrame.Raised)
+        self.frame_info.setLineWidth(3)
 
-
-        self.widget_info.label_lecture = QLabel('\n2020년 2학기 컴퓨터구조', self.widget_info)
-        font = self.widget_info.label_lecture.font()
+        label_lecture = QLabel('2020년 2학기 컴퓨터구조 기말고사', self.frame_info)
+        font = label_lecture.font()
         font.setBold(True)
         font.setPointSize(16)
-        self.widget_info.label_lecture.setFont(font)
+        label_lecture.setFont(font)
 
-        self.widget_info.label_duration = QLabel('\n시험시간 : 2020/12/21 15:00 ~ 2020/12/21 16:30', self.widget_info)
-        font = self.widget_info.label_duration.font()
+        label_duration = QLabel('\n시험시간 : 2020/12/21 15:00 ~ 2020/12/21 16:30', self.frame_info)
+        font = label_duration.font()
         font.setPointSize(12)
         font.setBold(True)
-        self.widget_info.label_duration.setFont(font)
+        label_duration.setFont(font)
 
-        self.widget_info.label_time = QLabel('\n' + QDateTime.currentDateTime().toString(Qt.DefaultLocaleLongDate), self.widget_info)
-        font = self.widget_info.label_time.font()
+        self.frame_info.label_time = QLabel('\n' + QDateTime.currentDateTime().toString(Qt.DefaultLocaleLongDate), self.frame_info)
+        font = self.frame_info.label_time.font()
         font.setPointSize(12)
         font.setBold(True)
-        self.widget_info.label_time.setFont(font)
+        self.frame_info.label_time.setFont(font)
 
-        self.widget_info.vbox_info = QVBoxLayout()
-        self.widget_info.vbox_info.addWidget(self.widget_info.label_lecture)
-        self.widget_info.vbox_info.addWidget(self.widget_info.label_duration)
-        self.widget_info.vbox_info.addWidget(self.widget_info.label_time)
+        vbox_info = QVBoxLayout()
+        vbox_info.addWidget(label_lecture)
+        vbox_info.addWidget(label_duration)
+        vbox_info.addWidget(self.frame_info.label_time)
 
-        self.widget_info.setLayout(self.widget_info.vbox_info)
+        self.frame_info.setLayout(vbox_info)
 
 
     def init_widget_cam(self):
-        self.widget_cam.btn_start = QPushButton('Clear cipboard and start!')
-        self.widget_cam.btn_start.clicked.connect(self.getClipboard)
+        self.widget_cam.btn_start = QPushButton('Clear clipboard and start!')
+        self.widget_cam.btn_start.clicked.connect(self.startExam)
 
         pixmap = QPixmap('winter.jpg')
         self.widget_cam.label_img = QLabel()
@@ -109,10 +112,12 @@ class MyApp(QWidget):
 
         vbox = QVBoxLayout()
         vbox.addWidget(self.widget_title)
-        vbox.addWidget(self.widget_info)
+        vbox.addStretch(1)
+        vbox.addWidget(self.frame_info)
         vbox.addStretch(2)
         vbox.addWidget(self.widget_cam)
         vbox.addStretch(1)
+        vbox.setContentsMargins(0, 0, 0, 0)
 
         self.setLayout(vbox)
 
@@ -125,12 +130,19 @@ class MyApp(QWidget):
 
     def setCurrentTime(self):
         datetime = QDateTime.currentDateTime()
-        self.widget_info.label_time.setText('\n' + datetime.toString(Qt.DefaultLocaleLongDate))
+        self.frame_info.label_time.setText('\n' + datetime.toString(Qt.DefaultLocaleLongDate))
 
-    def getClipboard(self):
-        data = clipboard.clear_clipboard()
-        print(data)
+    def startExam(self):
+        reply = QMessageBox.question(self, 'Message', '시험을 시작하시겠습니까?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
+        if reply == QMessageBox.Yes:
+            data = clipboard.clear_clipboard()
+            print(data)
+            self.widget_cam.btn_start.setDisabled(True)
+            print('yes')
+        else:
+            print('no')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
