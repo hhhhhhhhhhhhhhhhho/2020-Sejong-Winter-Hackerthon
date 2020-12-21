@@ -14,12 +14,10 @@ class TCPServer(threading.Thread):
 
         self.connections = []
         self.tcpServerThreads = []
-        print("host", HOST, "PORT", PORT)
 
     def run(self):
         try:
             while True:
-                print(sys.stdin.encoding)
                 print("tcp server :: server wait...")
                 connection, clientAddress = self.serverSocket.accept()
                 self.connections.append(connection)
