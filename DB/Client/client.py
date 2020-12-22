@@ -23,6 +23,7 @@ def recvall(sock, count):
 
 def login(student_id, exam_id):
     print("login")
+
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
             s.connect(addr)
