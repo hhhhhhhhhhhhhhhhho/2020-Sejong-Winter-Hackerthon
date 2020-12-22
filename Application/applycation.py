@@ -79,7 +79,7 @@ class MyApp(QWidget):
         self.widget_cam.btn_start = QPushButton('Clear clipboard and start!')
         self.widget_cam.btn_start.clicked.connect(self.startExam)
 
-        pixmap = QPixmap('winter.jpg')
+        pixmap = QPixmap('H:\\2020Hackathon\\team\\2020-Sejong-Winter-Hackerthon\\Application\\winter.jpg')
         self.widget_cam.label_img = QLabel()
         self.widget_cam.label_img.setPixmap(pixmap)
 
