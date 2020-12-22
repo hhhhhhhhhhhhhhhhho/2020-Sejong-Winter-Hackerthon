@@ -13,7 +13,7 @@ torch.manual_seed(1)
 # x data 의 경우 1시간 공부하고 2번 수업 참석 -> y data 인덱스에 대응하여 0 ( 불합격 )
 #이라는 데이터가 주어지는 것.
 
-xy = pd.read_csv("./eye_coordinate.csv")
+xy = pd.read_csv("./write.csv",sep=',')
 print(xy)
 
 x_data_pd = xy[['x','y']]
@@ -84,13 +84,13 @@ print(correct_prediction[:5])
 accuracy = correct_prediction.sum().item() / len(correct_prediction)
 print('The model has an accuracy of {:2.2f}% for the training set.'.format(accuracy * 100))
 
-test = [[250,200]]
+test = [[1,1.1]]
 test_data=torch.FloatTensor(test)
 
-hypothesis = torch.sigmoid(test_data.matmul(W) + b) # or .mm or @
-prediction = hypothesis >= torch.FloatTensor([0.5])
+hypo = torch.sigmoid(test_data.matmul(W) + b) # or .mm or @
+predict = hypothesis >= torch.FloatTensor([0.5])
 
 
-if(prediction == 1 ):
+if(predict == 1 ):
     print("부정행위가 감지되었습니다.")
 
