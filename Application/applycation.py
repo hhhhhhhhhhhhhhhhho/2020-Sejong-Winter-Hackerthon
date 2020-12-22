@@ -1,12 +1,13 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from DB.Client import client
+#from DB.Client import client
 import clipboard
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
+
 
 class MyApp(QWidget):
 
@@ -54,37 +55,55 @@ class MyApp(QWidget):
         self.frame_info.setFrameShadow(QFrame.Raised)
         self.frame_info.setLineWidth(3)
 
-        label_lecture = QLabel('2020년 2학기 컴퓨터구조 기말고사', self.frame_info)
-        font = label_lecture.font()
+        self.label_lecture = QLabel('2020년 2학기 컴퓨터구조 기말고사', self.frame_info)
+        font = self.label_lecture.font()
         font.setBold(True)
         font.setPointSize(16)
-        label_lecture.setFont(font)
+        self.label_lecture.setFont(font)
 
-        label_duration = QLabel('\n시험시간 : 2020/12/21 15:00 ~ 2020/12/21 16:30', self.frame_info)
-        font = label_duration.font()
+        hbox_lecture = QHBoxLayout()
+        hbox_lecture.addStretch(1)
+        hbox_lecture.addWidget(self.label_lecture)
+        hbox_lecture.addStretch(1)
+
+        self.label_duration = QLabel('\n시험시간 : ', self.frame_info)
+        hbox_duration = QHBoxLayout()
+        hbox_duration.addStretch(1)
+        hbox_duration.addWidget(self.label_duration)
+        hbox_duration.addStretch(1)
+
+        font = self.label_duration.font()
         font.setPointSize(12)
         font.setBold(True)
-        label_duration.setFont(font)
+        self.label_duration.setFont(font)
 
-        self.frame_info.label_time = QLabel('\n' + QDateTime.currentDateTime().toString(Qt.DefaultLocaleLongDate), self.frame_info)
-        font = self.frame_info.label_time.font()
+        self.label_time = QLabel('\n' + QDateTime.currentDateTime().toString(Qt.DefaultLocaleLongDate), self.frame_info)
+        font = self.label_time.font()
         font.setPointSize(12)
         font.setBold(True)
-        self.frame_info.label_time.setFont(font)
+        self.label_time.setFont(font)
+
+        hbox_time = QHBoxLayout()
+        hbox_time.addStretch(1)
+        hbox_time.addWidget(self.label_time)
+        hbox_time.addStretch(1)
 
         vbox_info = QVBoxLayout()
-        vbox_info.addWidget(label_lecture)
-        vbox_info.addWidget(label_duration)
-        vbox_info.addWidget(self.frame_info.label_time)
+        vbox_info.addLayout(hbox_lecture)
+        vbox_info.addLayout(hbox_duration)
+        vbox_info.addLayout(hbox_time)
 
         self.frame_info.setLayout(vbox_info)
 
 
     def init_widget_cam(self):
         self.widget_cam.btn_start = QPushButton('Clear clipboard and start!')
+        #self.widget_cam.btn_start.setMaximumWidth(500)
+        self.widget_cam.btn_start.setFixedSize(200, 50)
         self.widget_cam.btn_start.clicked.connect(self.startExam)
 
-        pixmap = QPixmap('H:\\2020Hackathon\\team\\2020-Sejong-Winter-Hackerthon\\Application\\winter.jpg')
+
+        pixmap = QPixmap('winter.jpg')
         self.widget_cam.label_img = QLabel()
         self.widget_cam.label_img.setPixmap(pixmap)
 
@@ -107,13 +126,18 @@ class MyApp(QWidget):
     def initUI(self):
 
         self.setWindowTitle('I See You')
-        #self.showMaximized()
-        self.setFixedSize(800, 800)
-        self.move(0, 0)
 
         pal = QPalette() # 배경색 변경
         pal.setColor(QPalette.Background, QColor(255, 255, 255))
         self.setPalette(pal)
+
+        self.btn_exit = QPushButton('시험 종료', self)
+        self.btn_exit.setFixedSize(100, 80)
+        self.btn_exit.clicked.connect(self.exit_exam)
+
+        hbox_exit = QHBoxLayout()
+        hbox_exit.addStretch(1)
+        hbox_exit.addWidget(self.btn_exit)
 
         vbox = QVBoxLayout()
         vbox.addWidget(self.widget_title)
@@ -122,6 +146,7 @@ class MyApp(QWidget):
         vbox.addStretch(2)
         vbox.addWidget(self.widget_cam)
         vbox.addStretch(1)
+        vbox.addLayout(hbox_exit)
         vbox.setContentsMargins(0, 0, 0, 0)
 
         self.setLayout(vbox)
@@ -131,11 +156,14 @@ class MyApp(QWidget):
         self.timer.timeout.connect(self.setCurrentTime)
         self.timer.start()
 
-        self.hide()
+        #self.setGeometry(0, 0, 800, 800)
+        #self.show()
+        self.showFullScreen()
+        #self.hide()
 
     def setCurrentTime(self):
         datetime = QDateTime.currentDateTime()
-        self.frame_info.label_time.setText('\n' + datetime.toString(Qt.DefaultLocaleLongDate))
+        self.label_time.setText('\n' + datetime.toString(Qt.DefaultLocaleLongDate))
 
     def startExam(self):
         reply = QMessageBox.question(self, 'Message', '시험을 시작하시겠습니까?',
@@ -143,12 +171,18 @@ class MyApp(QWidget):
 
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
-            data[256] = None
-            client.send_clipboard()
+            #client.send_clipboard()
             self.widget_cam.btn_start.setDisabled(True)
             print('yes')
         else:
             print('no')
+
+    def exit_exam(self):
+        reply = QMessageBox.question(self, 'Message', '시험을 종료하시겠습니까?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            sys.exit()
 
     def setID(self, id, num):
         self.id = id
@@ -157,6 +191,11 @@ class MyApp(QWidget):
     def run(self):
         self.show()
         print(self.id, self.num)
+
+    def set_duration(self, start, end):
+        self.label_duration.setText("\n시험시간 : " + start + ' ~ ' + end)
+
+
 
 class Sign_in(QWidget):
 
@@ -215,7 +254,7 @@ class Sign_in(QWidget):
         num = self.lineEdit_num.text()
         self.mainW.setID(id, num)
 
-        img = client.login(id, num)
+        #img = client.login(id, num)
 
         self.hide()
         self.mainW.run()
@@ -223,5 +262,6 @@ class Sign_in(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyApp()
-    sign_in = Sign_in(ex)
+    ex.set_duration('12:00', '13:30')
+    #sign_in = Sign_in(ex)
     sys.exit(app.exec_())
