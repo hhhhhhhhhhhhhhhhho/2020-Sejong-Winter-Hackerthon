@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-#from DB.Client import client
+from DB.Client import client
 import clipboard
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
@@ -157,8 +157,8 @@ class MyApp(QWidget):
 
         #self.setGeometry(0, 0, 800, 800)
         #self.show()
-        self.showFullScreen()
-        #self.hide()
+       # self.showFullScreen()
+        self.hide()
 
     def setCurrentTime(self):
         datetime = QDateTime.currentDateTime()
@@ -191,7 +191,7 @@ class MyApp(QWidget):
         self.num = num
 
     def run(self):
-        self.show()
+        self.showFullScreen()
         print(self.id, self.num)
 
     def set_duration(self, start, end):
@@ -256,7 +256,7 @@ class Sign_in(QWidget):
         num = self.lineEdit_num.text()
         self.mainW.setID(id, num)
 
-        #img = client.login(id, num)
+        arr = client.login(id, num)
 
         self.hide()
         self.mainW.run()
@@ -265,5 +265,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyApp()
     ex.set_duration('12:00', '13:30')
-    #sign_in = Sign_in(ex)
+    sign_in = Sign_in(ex)
     sys.exit(app.exec_())

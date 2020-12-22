@@ -20,7 +20,7 @@ class Face:
         self.zerocount =0
 
     def showvideo(self):
-
+        sscount=0
         while True:
             now = datetime.datetime.now()
             # 1프레임씩 가져오기
@@ -94,10 +94,15 @@ class Face:
 
             # Display the resulting image
             cv2.imshow('Video', self.frame)
+            sscount+=1
 
+            if(sscount==300):
+                self.video_capture.release()
+                return
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
+
         self.video_capture.release()
         cv2.destroyAllWindows()
 
@@ -169,6 +174,7 @@ class Face:
                     cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
                     font = cv2.FONT_HERSHEY_DUPLEX
                     cv2.putText(self.frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                    boxcheck == 0
                 else:
                     cv2.rectangle(self.frame, (left, top), (right, bottom), (0, 255, 0), 2)
                     cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
