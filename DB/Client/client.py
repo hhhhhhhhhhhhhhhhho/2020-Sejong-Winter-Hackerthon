@@ -82,6 +82,24 @@ def cheating(student_id, exam_id, error_type):
         cv2.waitKey(0)
         cv2.destroyAllWindows() 
 
+def send_clipboard(student_id, exam_id, clipboard):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.connect(addr)
+        except Exception as e:
+            print(" (%s:%s) not connect" % addr)
+            sys.exit()
+        print("(%s:%s) connect" % addr)
+
+        s.send('3'.encode())
+
+        # 학번, 시험번호 전송
+        s.send(exam_id.encode())
+        s.send(student_id.encode())
+        s.send(clipboard.encode())
+
+        s.close()
+
 def run():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:

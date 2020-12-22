@@ -60,6 +60,12 @@ def send_student_image(sock):
     cv2.waitKey(0)
     cv2.destroyAllWindows() 
 
+def receive_clipboard(sock):
+    exam_id = sock.recv(1)
+    student_id = sock.recv(8)
+    clipboard = sock.recv(255)
+    DBconnection.store_clipboard(exam_id, student_id, clipboard)
+
 class TCPServerThread(threading.Thread):
     def __init__(self, tcpServerThreads, connections, connection, clientAddress):
         threading.Thread.__init__(self)
@@ -76,7 +82,8 @@ class TCPServerThread(threading.Thread):
             send_student_image(self.connection)
         if type.decode() == '2':
             detect_cheat(self.connection)
-
+        if type.decode() == '3':
+            receive_clipboard(self.connection)
 
         # except:
         #     print("connect close")
