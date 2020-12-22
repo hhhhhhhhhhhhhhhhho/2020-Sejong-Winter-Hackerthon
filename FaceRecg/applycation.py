@@ -7,7 +7,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
-#import person_count
+import person_count
 import webbrowser
 
 class MyApp(QWidget):
@@ -171,7 +171,7 @@ class MyApp(QWidget):
             client.send_clipboard(self.id, self.exam_num, data)
             self.widget_cam.btn_start.setDisabled(True)
             print(data)
-            #person_count.start()
+            person_count.start()
             webbrowser.open('http://blackboard.sejong.ac.kr')
 
         else:
