@@ -201,7 +201,8 @@ def detection_cheat_for_eye():
             predict = main.classification.hypothesis >= torch.FloatTensor([0.5])
 
             if (predict == 1):
-                print("부정행위가 감지되었습니다.")
+                print(main.classification.W,main.classification.b)
+                #print("부정행위가 감지되었습니다.")
 
 
     # Close all windows

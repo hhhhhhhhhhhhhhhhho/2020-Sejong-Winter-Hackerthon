@@ -7,9 +7,9 @@ import numpy as np
 import pandas as pd
 
 class classification:
-
-
-
+    W = torch.zeros((2, 1), requires_grad=True)  # W 의 데이터는 2 by 1 이라고 할 수 있음.
+    # Torch.zeros 해당 매트릭스를 0( zero ) 로 초기화 한다는 것.
+    b = torch.zeros(1, requires_grad=True)
 
     def learning_model_classification(self):
         # For reproducibility
@@ -32,14 +32,14 @@ class classification:
         r_data = y_data_pd.tolist()
         x_train = torch.FloatTensor(x_data)
         r_train = torch.FloatTensor(r_data)
-        W = torch.ones((2, 1), requires_grad=True)
 
         W = torch.zeros((2, 1), requires_grad=True)  # W 의 데이터는 2 by 1 이라고 할 수 있음.
         # Torch.zeros 해당 매트릭스를 0( zero ) 로 초기화 한다는 것.
         b = torch.zeros(1, requires_grad=True)
-        nb_epochs = 10000
+
 
         # optimizer 설정
+        nb_epochs = 10000
         optimizer = optim.SGD([W, b], lr=0.01)
         for epoch in range(nb_epochs + 1):
 
