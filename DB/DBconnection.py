@@ -13,13 +13,13 @@ conn = pymysql.connect(
 )
 
 #DB에 참조하기 위한 객체
-curs = conn.cursor(pymysql.cursors.DictCursor) 
-#curs = conn.cursor() 
+#curs = conn.cursor(pymysql.cursors.DictCursor) 
+curs = conn.cursor() 
 
 # 학생 이미지 select
-def load_studentdata(exam_id):
-    sql = "select ES.student_id, I.file from EXAM_STUDENT ES inner join IMAGE I on ES.student_id = I.student_id where ES.exam_id = %s" 
-    curs.execute(sql, exam_id)
+def load_studentdata(exam_id, student_id):
+    sql = "select I.file from EXAM_STUDENT ES inner join IMAGE I on ES.student_id = I.student_id where ES.exam_id = %s and ES.student_id = %s" 
+    curs.execute(sql, (exam_id, student_id))
     conn.commit()
     return curs.fetchall()
 
@@ -35,8 +35,8 @@ def store_facelog(exam_id, student_id, image, error_type, remarks):
     curs.execute(sql, (exam_id, student_id, error_type, image, remarks))
     conn.commit()
 
-# data = load_studentdata(2)
-# print(data)
+data = load_studentdata(2, 18011529)
+print(data)
 
 # store_clipboard(1, 18011529, "어쩌구저쩌구")
 
