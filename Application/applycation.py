@@ -13,6 +13,9 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.id = ''
+        self.pw = ''
+
         self.widget_title = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_title(self.widget_title)
 
@@ -141,12 +144,19 @@ class MyApp(QWidget):
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
             data[256] = None
+            client.send_clipboard()
             self.widget_cam.btn_start.setDisabled(True)
             print('yes')
         else:
             print('no')
 
+    def setID(self, id, num):
+        self.id = id
+        self.num = num
 
+    def run(self):
+        self.show()
+        print(self.id, self.num)
 
 class Sign_in(QWidget):
 
@@ -203,13 +213,12 @@ class Sign_in(QWidget):
     def log_in(self):
         id = self.lineEdit_ID.text()
         num = self.lineEdit_num.text()
+        self.mainW.setID(id, num)
 
         img = client.login(id, num)
-        print(id, num)
-
-
+      
         self.hide()
-        self.mainW.show()
+        self.mainW.run()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
