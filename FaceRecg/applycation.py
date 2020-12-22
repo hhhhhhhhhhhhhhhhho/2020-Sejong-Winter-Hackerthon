@@ -9,11 +9,12 @@ from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
 import person_count
 import webbrowser
-
+from PIL import ImageGrab
 from time import sleep
 import threading
 import ctypes
-
+import numpy
+import cv2
 
 class MyApp(QWidget):
 
@@ -185,7 +186,9 @@ class MyApp(QWidget):
             self.widget_cam.btn_start.setDisabled(True)
             print(123)
             print(data)
-            person_count.start(self.arr_info[0])
+            vd = person_count.Face(self.arr_info[0])
+            #person_count.start(self.arr_info[0])
+            vd.facecheck()
             webbrowser.open('http://blackboard.sejong.ac.kr')
 
             sleep(1)
@@ -196,7 +199,7 @@ class MyApp(QWidget):
 
             window_thread = threading.Thread(target=self.check_window)
             window_thread.start()
-
+            vd.showvideo()
         else:
             print('no')
 
@@ -251,6 +254,12 @@ class MyApp(QWidget):
 
             if self.window.value != buffer.value:
                 print('cheat')
+                sleep(1)
+                img=ImageGrab.grab()
+                img.show()
+                imgsend = numpy.array(img)
+                #sendimg=cv2.imread(img)
+                client.cheating('17011502','3','3',imgsend)
                 sleep(5)
                 self.dialog.hide()
 
