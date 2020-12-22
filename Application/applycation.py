@@ -137,7 +137,7 @@ class MyApp(QWidget):
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
-            data = clipboard.clear_clipboard2()
+            data = clipboard.clear_clipboard()
             print(data)
             self.widget_cam.btn_start.setDisabled(True)
             print('yes')

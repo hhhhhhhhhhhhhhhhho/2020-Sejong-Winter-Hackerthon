@@ -1,4 +1,3 @@
-import win32clipboard
 from tkinter import Tk
 
 def clear_clipboard():
