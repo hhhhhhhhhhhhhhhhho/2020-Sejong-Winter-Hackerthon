@@ -47,6 +47,8 @@ def login(student_id, exam_id):
         cv2.destroyAllWindows() 
         s.close()
 
+        return decimg
+
 def cheating(student_id, exam_id, error_type):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
