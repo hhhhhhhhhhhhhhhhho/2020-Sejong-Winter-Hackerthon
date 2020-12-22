@@ -40,7 +40,6 @@ def send_exam_student_data(sock):
     student_id = sock.recv(8)
     print(student_id.decode())
     file = DBconnection.load_studentdata(exam_id, student_id)
-    print(file[0][0])
     #String형의 이미지를 수신받아서 이미지로 변환 하고 화면에 출력
     data = cv2.imread(file[0][0], cv2.IMREAD_UNCHANGED)
 
@@ -57,13 +56,16 @@ def send_exam_student_data(sock):
     print("tcp server :: img send...")
 
     # 시험정보 넘김
-    exam_data = DBconnection.load_examdata(exam_id)
+    exam_data = DBconnection.load_examdata2(exam_id, student_id)
     # 시험날짜
     sock.send(exam_data[0][1].strftime("%Y-%m-%d").encode())
     # 시작시간
     sock.send(exam_data[0][1].strftime("%H:%M:%S").encode())
     # 종료시간
     sock.send(exam_data[0][2].strftime("%H:%M:%S").encode())
+    # 사람이름
+    sock.send(str(len(exam_data[0][3].encode())).ljust(16).encode())
+    sock.send(exam_data[0][3].encode())
     # 과목명
     sock.send(exam_data[0][0].encode())
 
