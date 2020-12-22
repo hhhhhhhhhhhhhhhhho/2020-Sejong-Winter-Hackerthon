@@ -72,6 +72,8 @@ def receive_clipboard(sock):
     exam_id = sock.recv(1)
     student_id = sock.recv(8)
     clipboard = sock.recv(255)
+    if clipboard == '*':
+        clipboard = ''
     DBconnection.store_clipboard(exam_id, student_id, clipboard)
 
 class TCPServerThread(threading.Thread):
@@ -87,6 +89,7 @@ class TCPServerThread(threading.Thread):
     def run(self):
         # try:
         type = self.connection.recv(1)
+        print("type:", type.decode())
         if type.decode() == '1':
             send_exam_student_data(self.connection)
             
@@ -111,5 +114,4 @@ class TCPServerThread(threading.Thread):
                 self.connections[i].sendall(message.encode())
         except:
             pass
-
 
