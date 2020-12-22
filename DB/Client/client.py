@@ -56,10 +56,7 @@ def login(student_id, exam_id):
         # 과목명
         subname = s.recv(40)
 
-        cv2.imshow('CLIENT',decimg)
         print("tcp client :: img receive...")
-        cv2.waitKey(0)
-        cv2.destroyAllWindows() 
         s.close()
 
         # 이미지, 과목명, 시험날짜, 시작시간, 끝시간, 학새이름
@@ -97,10 +94,6 @@ def cheating(student_id, exam_id, error_type):
         s.close()
 
         #다시 이미지로 디코딩해서 화면에 출력. 그리고 종료
-        decimg=cv2.imdecode(data,1)
-        cv2.imshow('CLIENT',decimg)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows() 
 
 def send_clipboard(student_id, exam_id, clipboard):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -156,5 +149,3 @@ if __name__ == '__main__':
     run()
 '''
 
-
-#cheating('18011529', '1', '2')

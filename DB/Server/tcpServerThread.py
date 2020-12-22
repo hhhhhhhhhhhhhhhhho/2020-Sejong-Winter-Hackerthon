@@ -16,7 +16,7 @@ def recvall(sock, count):
         count -= len(newbuf)
     return buf
 
-def detect_cheat(sock):
+def detect_cheat(sock, serverGui):
     student_id = sock.recv(8)
     exam_id = sock.recv(1)
     error_type = sock.recv(1)
@@ -29,11 +29,10 @@ def detect_cheat(sock):
     url = 'H:\\2020Hackathon\\team\\2020-Sejong-Winter-Hackerthon\\DB\\Server\\images\\' + datetime.now().strftime('%Y%m%d%H%M%S') + '.jpg'
     print(url)
     DBconnection.store_facelog(exam_id, student_id, url, error_type, "three")
-    cv2.imshow('SERVER',decimg)
+    serverGui.add_row(exam_id.decode(), student_id.decode(), datetime.now().strftime('%Y-%m-%d %H:%M:%S'), error_type.decode(), url, '')
     cv2.imwrite(url, decimg)
     print("tcp server :: img receive...")
-    cv2.waitKey(0)
-    cv2.destroyAllWindows() 
+
 
 def send_exam_student_data(sock):
     exam_id = sock.recv(1)
@@ -76,21 +75,24 @@ def receive_clipboard(sock):
     DBconnection.store_clipboard(exam_id, student_id, clipboard)
 
 class TCPServerThread(threading.Thread):
-    def __init__(self, tcpServerThreads, connections, connection, clientAddress):
+    def __init__(self, tcpServerThreads, connections, connection, clientAddress, serverGui):
         threading.Thread.__init__(self)
 
         self.tcpServerThreads = tcpServerThreads
         self.connections = connections
         self.connection = connection
         self.clientAddress = clientAddress
+        self.serverGui = serverGui
 
     def run(self):
         # try:
         type = self.connection.recv(1)
         if type.decode() == '1':
             send_exam_student_data(self.connection)
+            
         if type.decode() == '2':
-            detect_cheat(self.connection)
+            detect_cheat(self.connection, self.serverGui)
+            #self.serverGui.add_row()
         if type.decode() == '3':
             receive_clipboard(self.connection)
 
