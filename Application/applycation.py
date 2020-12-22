@@ -7,7 +7,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
-
+import webbrowser
+import cv2
 
 class MyApp(QWidget):
 
@@ -18,7 +19,7 @@ class MyApp(QWidget):
         self.pw = ''
 
         self.widget_title = QWidget(parent=self, flags=Qt.Widget)
-        self.init_widget_title(self.widget_title)
+        self.init_widget_title()
 
         self.frame_info = QFrame()
         self.init_frame_info()
@@ -28,26 +29,24 @@ class MyApp(QWidget):
 
         self.initUI()
 
-    def init_widget_title(self, w):
+    def init_widget_title(self):
 
         self.widget_title.setStyleSheet("background-color: rgb(240, 240, 240)")
 
-        w.label_title = QLabel('I See You', w)
-        w.label_title.setStyleSheet("Color: rgb(110, 110, 110)")
-        font = w.label_title.font()
-        font.setPointSize(20)
-        font.setBold(True)
-        w.label_title.setFont(font)
+        self.label_title = QLabel(self.widget_title)
+        icon = QPixmap('icon.png')
+        icon_scaled = icon.scaled(50, 50)
+        self.label_title.setPixmap(icon_scaled)
 
-        w.label_ID = QLabel('17011477 목승주', w)
-        w.label_ID.setStyleSheet("Color: rgb(50, 50, 50)")
+        self.label_ID = QLabel('17011477 목승주', self.widget_title)
+        self.label_ID.setStyleSheet("Color: rgb(50, 50, 50)")
 
-        w.hbox_title = QHBoxLayout()
-        w.hbox_title.addWidget(w.label_title)
-        w.hbox_title.addStretch(1)
-        w.hbox_title.addWidget(w.label_ID)
+        hbox_title = QHBoxLayout()
+        hbox_title.addWidget(self.label_title)
+        hbox_title.addStretch(1)
+        hbox_title.addWidget(self.label_ID)
 
-        w.setLayout(w.hbox_title)
+        self.widget_title.setLayout(hbox_title)
 
 
     def init_frame_info(self):
@@ -174,6 +173,7 @@ class MyApp(QWidget):
             #client.send_clipboard()
             self.widget_cam.btn_start.setDisabled(True)
             print('yes')
+            webbrowser.open('http://blackboard.sejong.ac.kr')
         else:
             print('no')
 
