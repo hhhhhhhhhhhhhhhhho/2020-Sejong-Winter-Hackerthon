@@ -6,7 +6,7 @@ import pandas as pd
 # Load the detector
 import csv
 import main # AI main
-
+import torch
 
 detector = dlib.get_frontal_face_detector()
 
@@ -154,7 +154,7 @@ def detection_cheat_for_eye():
                 memory_cord_right.pop()
                 memory_cord_right.append(add_tuple(right_lefttop, right_eye_cord_int))
 
-            print(memory_cord)
+            #print(memory_cord)
             #cv2.circle(img=frame, center=left_lefttop, radius=3, color=(0, 255, 255), thickness=-1)
             cv2.circle(img=frame, center=memory_cord[-1], radius=2, color=(0, 0, 255), thickness=-1)
             #cv2.circle(img=frame, center=right_lefttop, radius=3, color=(0, 255, 0), thickness=-1)
@@ -187,17 +187,18 @@ def detection_cheat_for_eye():
             # 사람이 존재하지 않을 때 아예 데이터를 수집하지 않고, 부정행위 여부를 판단하지 않는 등의 판단이 필요함.
 
             ''' 학습 시킬 때 활성 화 '''
-            #f = open('write.csv', 'a', newline='')
-            #wr = csv.writer(f)
-            #wr.writerow([((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2,((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2 ,1])
+            f = open('write.csv', 'a', newline='')
+            wr = csv.writer(f)
+            wr.writerow([((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2,((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2 ,0])
             test_x = ((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2
             test_y = ((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2
 
             test = [[test_x, test_y]]
+            print(test)
             test_data = torch.FloatTensor(test)
 
-            hypothesis = torch.sigmoid(test_data.matmul(W) + b)  # or .mm or @
-            predict = hypothesis >= torch.FloatTensor([0.5])
+            main.classification.hypothesis = torch.sigmoid(test_data.matmul(main.classification.W) + main.classification.b)  # or .mm or @
+            predict = main.classification.hypothesis >= torch.FloatTensor([0.5])
 
             if (predict == 1):
                 print("부정행위가 감지되었습니다.")
