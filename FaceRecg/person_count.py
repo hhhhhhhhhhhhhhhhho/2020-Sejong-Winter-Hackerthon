@@ -8,7 +8,7 @@ from DB.Client import client
 from gaze_tracking import GazeTracking
 
 class Face:
-    def __init__(self):
+    def __init__(self, img):
         super().__init__()
         self.gaze = GazeTracking()
         self.video_capture = cv2.VideoCapture(0)
@@ -20,6 +20,8 @@ class Face:
         self.process_this_frame = True
         self.count = 0
         self.zerocount =0
+        self.img = img
+
 
     def showvideo(self):
         sscount=0
@@ -76,13 +78,15 @@ class Face:
 
             if self.count>=2:
                 #사람이 두명 이상일 때
-                client.cheating('18011529', '3', '3')
+                client.cheating('18011529', '3', '2',self.frame)
                 self.zerocount=0
                 cv2.putText(self.frame, "count : "+str(self.count) ,(0,20),font,1.0,(0,0,255),1)
             elif self.count==0:
+
                 #사람이 없을때
                 self.zerocount +=1
                 if self.zerocount > 100:
+                    client.cheating('18011529', '3', '2', self.frame)
                     # 자리를 비웠다고 완전히 판단될 때
                     cv2.putText(self.frame, "Away", (120, 20), font, 1.0, (0, 0, 0), 1)
                 else:
@@ -92,13 +96,11 @@ class Face:
                 self.zerocount=0
                 cv2.putText(self.frame, "count : " + str(self.count), (0, 20), font, 1.0, (0, 0, 0), 1)
 
-
-
-
             # Display the resulting image
             cv2.imshow('Video', self.frame)
-            sscount+=1
-
+            #sscount+=1
+            #if sscount==100:
+            #    return
 
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -108,7 +110,8 @@ class Face:
         cv2.destroyAllWindows()
 
     def facecheck(self):
-        student_img = face_recognition.load_image_file("kim.jpg")
+        unknowncnt = 0
+        student_img = self.img
         student_face_encoding = face_recognition.face_encodings(student_img)[0]
         known_face_encodings = [student_face_encoding]
         count=0
@@ -156,6 +159,7 @@ class Face:
 
             # Display the results
             boxcheck=0
+
             for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
                 # Scale back up face locations since the frame we detected in was scaled to 1/4 size
                 top *= 4
@@ -176,6 +180,7 @@ class Face:
                     font = cv2.FONT_HERSHEY_DUPLEX
                     cv2.putText(self.frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
                     boxcheck == 0
+                    unknowncnt+=1
                 else:
                     cv2.rectangle(self.frame, (left, top), (right, bottom), (0, 255, 0), 2)
                     cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
@@ -184,11 +189,13 @@ class Face:
                 boxcheck=1
             if(boxcheck==0):
                 count=0
+            if(unknowncnt==25):
+
+                client.cheating('17011502','2','3',self.frame)
+
             # Display the resulting image
             cv2.imshow('Video', self.frame)
             if(count>=100):
-
-
                 return
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -200,11 +207,12 @@ class Face:
 
     def hi(self):
         print(self.count)
-
-def start():
-    vd = Face()
+def start(img):
+    vd = Face(img)
     vd.facecheck()
-    vd.showvideo()
+    #vd.showvideo()
+    #vd.facecheck()
+    #vd.showvideo()
 
 if __name__=='__main__':
     vd = Face()

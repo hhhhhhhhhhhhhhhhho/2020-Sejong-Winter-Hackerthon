@@ -43,7 +43,6 @@ def login(student_id, exam_id):
         data = numpy.fromstring(stringData, dtype='uint8')
         decimg=cv2.imdecode(data,1)
 
-        
         # 시험날짜
         exam_date = s.recv(10)
         # 시작시간
@@ -64,7 +63,7 @@ def login(student_id, exam_id):
         return data
 
 
-def cheating(student_id, exam_id, error_type):
+def cheating(student_id, exam_id, error_type, frame):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
             s.connect(addr)
@@ -79,8 +78,8 @@ def cheating(student_id, exam_id, error_type):
         s.send(exam_id.encode())
         s.send(error_type.encode())
         #OpenCV를 이용해서 webcam으로 부터 이미지 추출
-        capture = cv2.VideoCapture(0)
-        ret, frame = capture.read()
+        #capture = cv2.VideoCapture(0)
+        #ret, frame = capture.read()
 
         #추출한 이미지를 String 형태로 변환(인코딩)시키는 과정
         encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
@@ -105,11 +104,15 @@ def send_clipboard(student_id, exam_id, clipboard):
         print("(%s:%s) connect" % addr)
 
         s.send('3'.encode())
-
+        print(exam_id, student_id, clipboard)
         # 학번, 시험번호 전송
         s.send(exam_id.encode())
         s.send(student_id.encode())
-        s.send(clipboard.encode())
+        if clipboard == None:
+            print("none")
+            s.send('*'.endcode())
+        else:
+            s.send(clipboard.encode())
 
         s.close()
 
