@@ -191,7 +191,7 @@ class Sign_in(QWidget):
         vbox.addStretch(1)
 
         self.setLayout(vbox)
-        #self.center()
+        self.center()
         self.show()
 
     def center(self):
