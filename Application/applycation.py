@@ -1,10 +1,14 @@
+import os
 import sys
+#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+#from FaceRecg import person_count
 import clipboard
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QMessageBox, QFrame
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QMessageBox, QFrame, QLineEdit
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QGridLayout
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
+
 
 class MyApp(QWidget):
 
@@ -126,7 +130,7 @@ class MyApp(QWidget):
         self.timer.timeout.connect(self.setCurrentTime)
         self.timer.start()
 
-        self.show()
+        self.hide()
 
     def setCurrentTime(self):
         datetime = QDateTime.currentDateTime()
@@ -144,7 +148,63 @@ class MyApp(QWidget):
         else:
             print('no')
 
+
+
+class Sign_in(QWidget):
+
+    def __init__(self, widget):
+        super().__init__()
+        self.mainW = widget
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('My First Application')
+        self.move(300, 300)
+        self.resize(400, 200)
+
+        self.label_ID = QLabel('학번', self)
+        self.lineEdit_ID = QLineEdit(self)
+
+        self.label_num = QLabel('학수번호', self)
+        self.lineEdit_num = QLineEdit(self)
+        self.lineEdit_num.returnPressed.connect(self.log_in)
+
+        self.btn_return = QPushButton('로그인', self)
+        self.btn_return.clicked.connect(self.log_in)
+
+        grid = QGridLayout()
+        grid.addWidget(self.label_ID, 0, 0)
+        grid.addWidget(self.lineEdit_ID, 0, 1)
+        grid.addWidget(QLabel('', self), 1, 0)
+        grid.addWidget(self.label_num, 2, 0)
+        grid.addWidget(self.lineEdit_num, 2, 1)
+
+        hbox = QHBoxLayout()
+        hbox.addStretch(2)
+        hbox.addLayout(grid)
+        hbox.addStretch(1)
+        hbox.addWidget(self.btn_return)
+        hbox.addStretch(2)
+
+        vbox = QVBoxLayout()
+        vbox.addStretch(1)
+        vbox.addLayout(hbox)
+        vbox.addStretch(1)
+
+        self.setLayout(vbox)
+        self.show()
+
+    def log_in(self):
+        id = self.lineEdit_ID.text()
+        num = self.lineEdit_num.text()
+        print(id, num)
+
+        self.hide()
+        self.mainW.show()
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyApp()
+    sign_in = Sign_in(ex)
     sys.exit(app.exec_())

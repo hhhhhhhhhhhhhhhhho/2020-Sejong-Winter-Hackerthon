@@ -14,6 +14,7 @@ face_encodings = []
 face_names = ["kim"]
 process_this_frame = True
 count = 0
+zerocount =0
 
 while True:
     now = datetime.datetime.now()
@@ -65,9 +66,25 @@ while True:
 
 
     font = cv2.FONT_HERSHEY_DUPLEX
-    cv2.putText(frame, "count : ", (0, 20), font, 1.0, (0, 0, 0), 1)
 
-    cv2.putText(frame, str(count) ,(120,20),font,1.0,(0,0,0),1)
+
+    if count>=2:
+        #사람이 두명 이상일 때
+        zerocount=0
+        cv2.putText(frame, "count : "+str(count) ,(0,20),font,1.0,(0,0,255),1)
+    elif count==0:
+        #사람이 없을때
+        zerocount +=1
+        if zerocount > 100:
+            # 자리를 비웠다고 완전히 판단될 때
+            cv2.putText(frame, "Away", (120, 20), font, 1.0, (0, 0, 0), 1)
+        else:
+            cv2.putText(frame, "count : "+str(count) ,(0,20),font,1.0,(0,0,0),1)
+    else:
+        #정상
+        zerocount=0
+        cv2.putText(frame, "count : " + str(count), (0, 20), font, 1.0, (0, 0, 0), 1)
+
 
 
     # Display the resulting image
