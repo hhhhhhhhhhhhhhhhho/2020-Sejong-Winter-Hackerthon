@@ -3,6 +3,7 @@
 AI/.idea
 FaceRecg/face_recognition/__pycache__
 FaceRecg/gaze_tracking/__pycache__
+Application/__pyache__
 
 #File
 .DS_Store
