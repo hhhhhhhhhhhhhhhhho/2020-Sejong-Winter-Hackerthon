@@ -35,7 +35,7 @@ class MyApp(QWidget):
         self.widget_cam = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_cam()
 
-        self.dialog = QDialog()
+
 
 
         self.initUI()
@@ -186,7 +186,7 @@ class MyApp(QWidget):
             self.widget_cam.btn_start.setDisabled(True)
             print(123)
             print(data)
-            vd = person_count.Face(self.arr_info[0])
+            vd = person_count.Face(self.arr_info[0],self.id,self.exam_num)
             #person_count.start(self.arr_info[0])
             vd.facecheck()
             webbrowser.open('http://blackboard.sejong.ac.kr')
@@ -233,18 +233,6 @@ class MyApp(QWidget):
     def set_label_lecture(self):
         self.label_lecture.setText('2020년 2학기 ' + self.arr_info[1] + ' 기말고사')
 
-    def on_press(self, key):  # The function that's called when a key is pressed
-        # logging.info("Key pressed: {0}".format(key))
-        print(key)
-        sleep(1)
-        sys.stdout.flush()
-
-    def on_release(self, key):  # The function that's called when a key is released
-        # logging.info("Key released: {0}".format(key))
-        print(key)
-        sleep(1)
-        sys.stdout.flush()
-
     def check_window(self):
         while(True):
             lib = ctypes.windll.LoadLibrary('user32.dll')
@@ -253,15 +241,16 @@ class MyApp(QWidget):
             lib.GetWindowTextW(handle, buffer, ctypes.sizeof(buffer))  # 버퍼에 타이틀 저장
 
             if self.window.value != buffer.value:
-                print('cheat')
                 sleep(1)
                 img=ImageGrab.grab()
-                img.show()
                 imgsend = numpy.array(img)
                 #sendimg=cv2.imread(img)
-                client.cheating('17011502','3','3',imgsend)
-                sleep(5)
-                self.dialog.hide()
+                client.cheating(self.id,self.exam_num,'3',imgsend)
+            sleep(10)
+
+
+
+
 
 
 class Sign_in(QWidget):
@@ -330,23 +319,7 @@ class Sign_in(QWidget):
 
 if __name__ == '__main__':
 
-    '''
-    t1 = threading.Thread(target=QApplication(sys.argv))
-    t2 = threading.Thread(target=MyApp())
-    t3 = threading.Thread(target=Sign_in(MyApp()))
-    t1.start()
-    t2.start()
-    t3.start()
-    sys.exit(t2.exec_())
-    '''
     app = QApplication(sys.argv)
-
-
-
     ex = MyApp()
-    t1 = threading.Thread()
-    #t1.start()
     sign_in = Sign_in(ex)
-
-
     sys.exit(app.exec_())

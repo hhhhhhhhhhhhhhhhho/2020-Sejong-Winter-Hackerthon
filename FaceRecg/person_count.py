@@ -8,7 +8,7 @@ from DB.Client import client
 from gaze_tracking import GazeTracking
 
 class Face:
-    def __init__(self, img):
+    def __init__(self, img, id, exam):
         super().__init__()
         self.gaze = GazeTracking()
         self.video_capture = cv2.VideoCapture(0)
@@ -21,6 +21,8 @@ class Face:
         self.count = 0
         self.zerocount =0
         self.img = img
+        self.id = id
+        self.exam = exam
 
 
     def showvideo(self):
@@ -78,7 +80,7 @@ class Face:
 
             if self.count>=2:
                 #사람이 두명 이상일 때
-                client.cheating('18011529', '3', '2',self.frame)
+                client.cheating(self.id, self.exam, '2',self.frame)
                 self.zerocount=0
                 cv2.putText(self.frame, "count : "+str(self.count) ,(0,20),font,1.0,(0,0,255),1)
             elif self.count==0:
@@ -86,7 +88,7 @@ class Face:
                 #사람이 없을때
                 self.zerocount +=1
                 if self.zerocount > 100:
-                    client.cheating('18011529', '3', '2', self.frame)
+                    client.cheating(self.id, self.exam, '2', self.frame)
                     # 자리를 비웠다고 완전히 판단될 때
                     cv2.putText(self.frame, "Away", (120, 20), font, 1.0, (0, 0, 0), 1)
                 else:
@@ -191,7 +193,7 @@ class Face:
                 count=0
             if(unknowncnt==25):
 
-                client.cheating('17011502','2','3',self.frame)
+                client.cheating(self.id,self.exam,'3',self.frame)
 
             # Display the resulting image
             cv2.imshow('Video', self.frame)
