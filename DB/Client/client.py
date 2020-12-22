@@ -1,7 +1,6 @@
 
 import socket
 import sys
-from PIL import Image
 import os
 import io
 from array import array
@@ -9,9 +8,10 @@ import base64
 import cv2
 import numpy
 
-host = '127.0.0.1'
+host = '192.168.35.190'
 port = 9999
 addr = (host, port)
+id = '18011529'
 
 def run():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -21,6 +21,9 @@ def run():
             print(" (%s:%s) not connect" % addr)
             sys.exit()
         print("(%s:%s) connect" % addr)
+
+        #학번 전송
+        s.send(id.encode())
 
         #OpenCV를 이용해서 webcam으로 부터 이미지 추출
         capture = cv2.VideoCapture(0)

@@ -35,9 +35,9 @@ def store_facelog(exam_id, student_id, image, error_type, remarks):
     curs.execute(sql, (exam_id, student_id, error_type, image, remarks))
     conn.commit()
 
-data = load_studentdata(2)
-print(data)
+# data = load_studentdata(2)
+# print(data)
 
-store_clipboard(1, 18011529, "어쩌구저쩌구")
+# store_clipboard(1, 18011529, "어쩌구저쩌구")
 
-store_facelog(5, 18011529, "log_images/image1.jpg", 2, "three")
+# store_facelog(5, 18011529, "log_images/image1.jpg", 2, "three")
