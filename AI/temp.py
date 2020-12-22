@@ -195,6 +195,12 @@ def detection_cheat_for_eye():
             test_x = ((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2
             test_y = ((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2
 
+            if test_x < 0 :
+                abs(test_x)
+
+             if test_x > 3  and test_x < 100:
+
+            '''
             test = [[test_x, test_y]]
             #print(test)
             test_data = torch.FloatTensor(test)
@@ -204,11 +210,11 @@ def detection_cheat_for_eye():
             #b = tf.constant([0.8373])
             main.classification.hypothesis = torch.sigmoid(test_data.matmul(W) + b)  # or .mm or @
             predict = main.classification.hypothesis >= torch.FloatTensor([0.5])
-
+            '''
             if (predict == 0):
                 cnt=cnt+1
                 #print(main.classification.W,main.classification.b)
-                if(cnt==15):
+                if(cnt==3):
                     print("부정행위가 감지되었습니다.")
                     cnt=0
 
