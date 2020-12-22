@@ -1,15 +1,12 @@
 import win32clipboard
+from tkinter import Tk
 
 def clear_clipboard():
-    win32clipboard.OpenClipboard()
-
     try:
-        data = win32clipboard.GetClipboardData()
+        data = Tk().clipboard_get()
     except:
         data = None
 
-    win32clipboard.EmptyClipboard()
-    win32clipboard.CloseClipboard()
+    Tk().clipboard_clear()
 
     return data
-
