@@ -1,41 +1,71 @@
 import sys
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
-class MainWindow(QMainWindow):
+class LogInDialog(QDialog):
     def __init__(self):
         super().__init__()
-        # 윈도우 설정
-        self.setGeometry(300, 300, 400, 300)  # x, y, w, h
-        self.setWindowTitle('Status Window')
+        self.setupUI()
 
-        # QButton 위젯 생성
-        self.button = QPushButton('Dialog Button', self)
-        self.button.clicked.connect(self.dialog_open)
-        self.button.setGeometry(10, 10, 200, 50)
+        self.id = None
+        self.password = None
 
-        # QDialog 설정
-        self.dialog = QDialog()
+    def setupUI(self):
+        self.setGeometry(1100, 200, 300, 200)
+        self.setWindowTitle("Warning!")
+        self.setWindowIcon(QIcon('icon.png'))
 
-    # 버튼 이벤트 함수
-    def dialog_open(self):
-        # 버튼 추가
-        btnDialog = QPushButton("OK", self.dialog)
-        btnDialog.move(100, 100)
-        btnDialog.clicked.connect(self.dialog_close)
+        label1 = QLabel("부정행위 식별: 다른 프로세스 접속")
 
-        # QDialog 세팅
-        self.dialog.setWindowTitle('Dialog')
-        self.dialog.setWindowModality(Qt.ApplicationModal)
-        self.dialog.resize(300, 200)
-        self.dialog.show()
+        #self.lineEdit1 = QLineEdit()
+        #self.lineEdit2 = QLineEdit()
+        #self.pushButton1= QPushButton("Sign In")
+        #self.pushButton1.clicked.connect(self.pushButtonClicked)
 
-    # Dialog 닫기 이벤트
-    def dialog_close(self):
-        self.dialog.close()
+        layout = QGridLayout()
+        layout.addWidget(label1, 0, 0)
+        #layout.addWidget(self.lineEdit1, 0, 1)
+        #layout.addWidget(self.pushButton1, 0, 2)
+        #layout.addWidget(label2, 1, 0)
+        #layout.addWidget(self.lineEdit2, 1, 1)
 
-if __name__ == '__main__':
+        self.setLayout(layout)
+        #self.show()
+
+    def pushButtonClicked(self):
+        self.id = self.lineEdit1.text()
+        self.password = self.lineEdit2.text()
+        self.close()
+
+class MyWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setupUI()
+
+    def setupUI(self):
+        self.setGeometry(800, 200, 300, 300)
+        self.setWindowTitle("PyStock v0.1")
+        self.setWindowIcon(QIcon('icon.png'))
+
+        self.pushButton = QPushButton("Sign In")
+        self.pushButton.clicked.connect(self.pushButtonClicked)
+        self.label = QLabel()
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.pushButton)
+        layout.addWidget(self.label)
+
+        self.setLayout(layout)
+
+    def pushButtonClicked(self):
+        dlg = LogInDialog()
+        dlg.exec_()
+        id = dlg.id
+        password = dlg.password
+        self.label.setText("id: %s password: %s" % (id, password))
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = MainWindow()
-    mainWindow.show()
-    sys.exit(app.exec_())
+    window = MyWindow()
+    window.show()
+    app.exec_()
