@@ -185,8 +185,6 @@ def detection_cheat_for_eye():
             #memory_cord[-1] # 왼쪽 검은자 중심 좌표
             #memory_cord_right[-1] # 오른쪽 검은자 중심 좌표
 
-            # 주의 :: 종종 눈의 중심을 놓치는 경우가 많은데, 이런 경우 이전의 중심 좌표를 그대로 가져와서 사용하므로
-            # 사람이 존재하지 않을 때 아예 데이터를 수집하지 않고, 부정행위 여부를 판단하지 않는 등의 판단이 필요함.
 
             ''' 학습 시킬 때 활성 화 '''
             #f = open('write.csv', 'a', newline='')
@@ -195,12 +193,16 @@ def detection_cheat_for_eye():
             test_x = ((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2
             test_y = ((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2
 
-            if test_x < 0 :
-                abs(test_x)
 
-             if test_x > 3  and test_x < 100:
+            ''' 임의로 정한 부정행위 값'''
+            if abs(test_x) > 2 and abs(test_y) > 2:
+                cnt = cnt + 1
+                # print(main.classification.W,main.classification.b)
+                if (cnt == 3):
+                    print("부정행위가 감지되었습니다.")
+                    cnt = 0
 
-            '''
+            ''' Classification 적용한 부정행위 진단
             test = [[test_x, test_y]]
             #print(test)
             test_data = torch.FloatTensor(test)
@@ -210,14 +212,14 @@ def detection_cheat_for_eye():
             #b = tf.constant([0.8373])
             main.classification.hypothesis = torch.sigmoid(test_data.matmul(W) + b)  # or .mm or @
             predict = main.classification.hypothesis >= torch.FloatTensor([0.5])
-            '''
+            
             if (predict == 0):
                 cnt=cnt+1
                 #print(main.classification.W,main.classification.b)
                 if(cnt==3):
                     print("부정행위가 감지되었습니다.")
                     cnt=0
-
+            '''
 
     # Close all windows
     cap.relase()
