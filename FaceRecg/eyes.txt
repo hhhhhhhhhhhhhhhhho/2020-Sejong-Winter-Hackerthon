@@ -1,0 +1,1064 @@
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(284, 238)(381, 243)
+(282, 233)(380, 228)
+(283, 232)(384, 230)
+(283, 232)(387, 229)
+(282, 227)(387, 224)
+(282, 225)(389, 221)
+(285, 223)(390, 220)
+(279, 224)(388, 220)
+(280, 224)(387, 220)
+(277, 225)(386, 222)
+(277, 226)(385, 222)
+(276, 226)(384, 222)
+(276, 228)(382, 225)
+(276, 229)(379, 226)
+(275, 233)(377, 231)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(267, 220)(369, 219)
+(266, 224)(370, 226)
+(266, 226)(372, 227)
+(268, 232)(378, 234)
+(266, 242)(380, 245)
+(267, 244)(384, 249)
+(266, 267)(388, 272)
+(266, 269)(392, 275)
+(265, 273)(393, 279)
+(262, 272)(392, 277)
+(261, 269)(391, 274)
+(260, 270)(389, 274)
+(261, 273)(389, 277)
+(262, 272)(390, 277)
+(263, 271)(392, 276)
+(265, 272)(392, 277)
+(265, 273)(392, 278)
+(264, 274)(393, 279)
+(264, 274)(393, 279)
+(265, 272)(392, 278)
+(263, 271)(391, 277)
+(260, 262)(386, 267)
+(259, 254)(383, 258)
+(257, 246)(379, 249)
+(252, 230)(371, 233)
+(248, 222)(365, 225)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(19, 431)(66, 428)
+(16, 430)(66, 428)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(297, 336)(379, 324)
+(298, 335)(379, 323)
+(298, 337)(378, 324)
+(297, 337)(378, 324)
+(297, 336)(377, 323)
+(295, 335)(376, 322)
+(296, 332)(376, 320)
+(295, 332)(376, 319)
+(294, 331)(374, 319)
+NoneNone
+NoneNone
+(285, 335)(368, 323)
+(286, 330)(368, 317)
+(289, 324)(371, 311)
+(286, 322)(370, 308)
+(285, 324)(368, 310)
+(281, 331)(364, 318)
+(280, 334)(363, 320)
+(279, 336)(362, 322)
+(278, 340)(362, 326)
+(278, 345)(361, 331)
+(281, 352)(364, 338)
+(282, 357)(365, 343)
+(282, 360)(364, 344)
+(284, 365)(365, 350)
+NoneNone
+(289, 368)(371, 353)
+(290, 369)(372, 351)
+(291, 370)(371, 353)
+(291, 370)(370, 352)
+(291, 372)(371, 355)
+NoneNone
+NoneNone
+(294, 384)(371, 366)
+(295, 387)(375, 368)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(341, 294)(420, 308)
+(260, 235)(342, 244)
+(234, 217)(323, 225)
+(223, 206)(309, 213)
+(220, 204)(309, 211)
+(223, 202)(308, 209)
+(220, 198)(305, 204)
+(220, 197)(305, 204)
+(219, 197)(305, 203)
+(218, 196)(304, 203)
+(219, 196)(304, 203)
+(217, 196)(303, 202)
+(217, 195)(302, 201)
+(216, 193)(302, 199)
+(218, 194)(303, 200)
+NoneNone
+(227, 221)(313, 232)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(357, 234)(422, 252)
+(360, 240)(424, 257)
+(362, 251)(426, 269)
+(360, 283)(424, 300)
+(357, 302)(421, 317)
+(358, 322)(422, 339)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(335, 255)(408, 268)
+(343, 264)(415, 276)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(277, 139)(351, 151)
+(276, 138)(352, 151)
+(276, 138)(353, 151)
+(276, 137)(352, 150)
+(276, 137)(353, 149)
+(277, 137)(353, 149)
+(283, 139)(359, 152)
+(285, 141)(361, 155)
+(297, 147)(372, 162)
+(301, 154)(376, 168)
+(308, 168)(381, 186)
+(308, 164)(379, 183)
+NoneNone
+NoneNone
+NoneNone
+(344, 229)(413, 243)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(389, 326)(451, 332)
+(394, 327)(455, 333)
+(398, 330)(459, 336)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(364, 312)(429, 317)
+(348, 302)(410, 307)
+(338, 297)(402, 302)
+(323, 289)(387, 293)
+(318, 286)(382, 289)
+(310, 288)(374, 291)
+(303, 294)(367, 298)
+NoneNone
+(263, 280)(327, 286)
+NoneNone
+NoneNone
+(198, 253)(262, 259)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(198, 223)(271, 217)
+(202, 225)(272, 216)
+NoneNone
+(179, 242)(249, 233)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(319, 101)(389, 99)
+(339, 116)(408, 115)
+(382, 108)(454, 108)
+(398, 108)(471, 108)
+NoneNone
+(520, 155)(595, 167)
+NoneNone
+(512, 171)(583, 187)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(221, 200)(302, 208)
+(221, 197)(302, 204)
+(221, 195)(304, 202)
+(221, 192)(305, 200)
+(220, 193)(304, 202)
+(218, 192)(301, 200)
+(207, 189)(290, 198)
+(196, 188)(279, 197)
+(175, 184)(255, 194)
+(157, 178)(237, 188)
+NoneNone
+NoneNone
+(27, 120)(100, 127)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+(164, 260)(229, 269)
+(192, 265)(258, 272)
+(238, 260)(306, 264)
+(260, 261)(331, 263)
+(281, 263)(356, 260)
+(285, 262)(362, 258)
+(293, 282)(373, 276)
+(294, 279)(376, 273)
+(300, 277)(383, 271)
+(307, 272)(394, 267)
+(314, 274)(400, 270)
+NoneNone
+(326, 287)(426, 286)
+(322, 281)(422, 279)
+(325, 287)(427, 284)
+(323, 297)(416, 292)
+(313, 311)(412, 306)
+(312, 311)(411, 307)
+(322, 315)(414, 312)
+(321, 316)(421, 317)
+(327, 304)(417, 305)
+NoneNone
+(329, 240)(425, 241)
+(325, 235)(423, 236)
+(327, 232)(417, 233)
+(342, 226)(433, 232)
+(351, 244)(438, 250)
+(345, 255)(433, 261)
+(340, 248)(427, 253)
+(322, 232)(408, 236)
+(306, 233)(401, 235)
+(313, 241)(400, 242)
+(317, 251)(411, 252)
+(328, 251)(414, 252)
+(331, 254)(418, 253)
+(349, 251)(441, 251)
+(367, 256)(459, 257)
+(376, 260)(470, 261)
+(391, 272)(481, 273)
+(391, 273)(477, 274)
+(395, 284)(481, 286)
+(400, 290)(485, 292)
+(396, 292)(489, 294)
+(403, 294)(489, 295)
+(396, 296)(487, 298)
+(396, 305)(487, 307)
+(399, 309)(484, 310)
+(387, 311)(477, 313)
+(372, 313)(462, 315)
+(367, 315)(456, 316)
+(359, 312)(444, 313)
+(344, 310)(429, 310)
+(337, 305)(421, 306)
+(331, 305)(416, 305)
+(318, 300)(402, 301)
+(311, 299)(395, 299)
+(304, 298)(388, 297)
+(301, 298)(385, 297)
+(296, 300)(384, 300)
+(294, 302)(378, 302)
+(292, 307)(376, 307)
+(289, 309)(373, 309)
+(287, 311)(371, 312)
+(285, 313)(369, 314)
+(286, 318)(369, 320)
+(285, 320)(368, 321)
+(286, 320)(369, 322)
+(287, 320)(369, 322)
+(287, 317)(369, 319)
+(287, 316)(369, 318)
+(288, 316)(370, 319)
+(288, 315)(370, 318)
+(288, 315)(370, 318)
+(289, 315)(370, 317)
+(289, 315)(371, 318)
+(289, 314)(371, 317)
+(290, 315)(372, 318)
+(290, 315)(372, 318)
+(290, 316)(372, 319)
+(289, 315)(371, 318)
+(287, 314)(369, 317)
+(284, 313)(366, 315)
+(277, 310)(361, 312)
+(276, 309)(359, 310)
+(276, 305)(359, 306)
+(279, 302)(361, 303)
+(283, 301)(363, 303)
+(285, 299)(365, 301)
+(290, 296)(367, 300)
+(292, 295)(368, 299)
+(294, 293)(370, 298)
+(295, 292)(370, 298)
+(299, 292)(373, 298)
+(301, 293)(374, 300)
+(305, 294)(377, 302)
+(309, 296)(380, 305)
+(319, 299)(387, 309)
+(324, 300)(390, 311)
+(330, 302)(394, 314)
+(330, 303)(394, 314)
+(329, 304)(393, 315)
+(327, 305)(393, 315)
+(321, 306)(390, 316)
+(317, 307)(388, 316)
+(308, 310)(380, 315)
+(303, 309)(380, 315)
+(298, 309)(377, 314)
+(294, 309)(375, 314)
+(288, 310)(370, 313)
+(285, 311)(368, 314)
+(280, 312)(365, 314)
+(279, 312)(363, 314)
+(277, 312)(362, 314)
+(274, 313)(359, 315)
+(273, 313)(360, 314)
+(270, 313)(358, 314)
+(262, 313)(346, 313)
+(259, 313)(342, 313)
+(256, 312)(339, 312)
+(254, 311)(336, 311)
+(254, 310)(338, 311)
+(254, 311)(336, 311)
+(256, 312)(341, 313)
+(257, 312)(342, 313)
+(260, 313)(344, 313)
+(263, 313)(350, 314)
+(271, 313)(356, 315)
+(276, 313)(361, 316)
+(279, 313)(364, 316)
+(283, 314)(368, 317)
+(291, 310)(374, 314)
+(296, 304)(378, 308)
+(303, 295)(385, 301)
+(308, 291)(388, 299)
+(309, 286)(389, 294)
+(311, 285)(391, 293)
+(315, 282)(391, 290)
+(320, 282)(394, 291)
+(323, 282)(395, 291)
+(324, 282)(395, 291)
+(325, 280)(394, 289)
+(325, 280)(394, 290)
+(323, 283)(393, 292)
+(321, 283)(392, 292)
+(316, 279)(388, 289)
+(311, 278)(383, 290)
+(296, 276)(370, 287)
+(287, 272)(360, 282)
+(278, 268)(352, 280)
+(267, 266)(340, 276)
+(234, 260)(307, 269)
+(213, 258)(284, 267)
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
+NoneNone
