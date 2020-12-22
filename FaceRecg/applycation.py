@@ -7,8 +7,13 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
-#import person_count
+import person_count
 import webbrowser
+
+from time import sleep
+import threading
+import ctypes
+
 
 class MyApp(QWidget):
 
@@ -17,6 +22,7 @@ class MyApp(QWidget):
 
         self.id = ''
         self.exam_num = ''
+        self.name = ''
         self.arr_info = []
 
         self.widget_title = QWidget(parent=self, flags=Qt.Widget)
@@ -27,6 +33,9 @@ class MyApp(QWidget):
 
         self.widget_cam = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_cam()
+
+        self.dialog = QDialog()
+
 
         self.initUI()
 
@@ -39,7 +48,7 @@ class MyApp(QWidget):
         icon_scaled = icon.scaled(50, 50)
         self.label_title.setPixmap(icon_scaled)
 
-        self.label_ID = QLabel('17011477 목승주', self.widget_title)
+        self.label_ID = QLabel(self.widget_title)
         self.label_ID.setStyleSheet("Color: rgb(50, 50, 50)")
 
         hbox_title = QHBoxLayout()
@@ -107,21 +116,21 @@ class MyApp(QWidget):
         self.widget_cam.label_img = QLabel()
         self.widget_cam.label_img.setPixmap(pixmap)
 
-        self.widget_cam.hbox_btn = QHBoxLayout()
-        self.widget_cam.hbox_btn.addStretch(1)
-        self.widget_cam.hbox_btn.addWidget(self.widget_cam.btn_start)
-        self.widget_cam.hbox_btn.addStretch(1)
+        hbox_btn = QHBoxLayout()
+        hbox_btn.addStretch(1)
+        hbox_btn.addWidget(self.widget_cam.btn_start)
+        hbox_btn.addStretch(1)
 
-        self.widget_cam.hbox_img = QHBoxLayout()
-        self.widget_cam.hbox_img.addStretch(1)
-        self.widget_cam.hbox_img.addWidget(self.widget_cam.label_img)
-        self.widget_cam.hbox_img.addStretch(1)
+        hbox_img = QHBoxLayout()
+        hbox_img.addStretch(1)
+        hbox_img.addWidget(self.widget_cam.label_img)
+        hbox_img.addStretch(1)
 
-        self.widget_cam.vbox_img = QVBoxLayout()
-        self.widget_cam.vbox_img.addLayout(self.widget_cam.hbox_btn)
-        self.widget_cam.vbox_img.addLayout(self.widget_cam.hbox_img)
+        vbox_img = QVBoxLayout()
+        vbox_img.addLayout(hbox_btn)
+        vbox_img.addLayout(hbox_img)
 
-        self.widget_cam.setLayout(self.widget_cam.vbox_img)
+        self.widget_cam.setLayout(vbox_img)
 
     def initUI(self):
 
@@ -156,6 +165,7 @@ class MyApp(QWidget):
         self.timer.timeout.connect(self.setCurrentTime)
         self.timer.start()
 
+        #self.showFullScreen()
         self.hide()
 
     def setCurrentTime(self):
@@ -168,11 +178,24 @@ class MyApp(QWidget):
 
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
+            if data==None:
+                data='*'
             client.send_clipboard(self.id, self.exam_num, data)
+
             self.widget_cam.btn_start.setDisabled(True)
+            print(123)
             print(data)
-            #person_count.start()
+            person_count.start(self.arr_info[0])
             webbrowser.open('http://blackboard.sejong.ac.kr')
+
+            sleep(1)
+            lib = ctypes.windll.LoadLibrary('user32.dll')
+            handle = lib.GetForegroundWindow()  # 활성화된 윈도우의 핸들얻음
+            self.window = ctypes.create_unicode_buffer(255)  # 타이틀을 저장할 버퍼
+            lib.GetWindowTextW(handle, self.window, ctypes.sizeof(self.window))  # 버퍼에 타이틀 저장
+
+            window_thread = threading.Thread(target=self.check_window)
+            window_thread.start()
 
         else:
             print('no')
@@ -184,21 +207,53 @@ class MyApp(QWidget):
         if reply == QMessageBox.Yes:
             sys.exit()
 
-    def setID(self, id, num):
+    def setID(self, id, exam_num):
         self.id = id
-        self.num = num
+        self.exam_num = exam_num
 
     def run(self, arr_login):
         self.showFullScreen()
         self.arr_info = arr_login
-        self.set_lecture()
-        self.set_duration()
+        self.set_label_lecture()
+        self.set_label_duration()
+        self.set_label_ID()
+        #os.startfile("filename.exe")
+        #with Listener(on_press=self.on_press, on_release=self.on_release) as listener:  # Create an instance of Listener
+         #   listener.join()  # Join the listener thread to the main thread to keep waiting for keys
 
-    def set_duration(self):
+    def set_label_ID(self):
+        self.label_ID.setText(self.id + ' ' + self.arr_info[5])
+
+    def set_label_duration(self):
         self.label_duration.setText("\n시험시간 : " + self.arr_info[3] + '~' + self.arr_info[4])
 
-    def set_lecture(self):
+    def set_label_lecture(self):
         self.label_lecture.setText('2020년 2학기 ' + self.arr_info[1] + ' 기말고사')
+
+    def on_press(self, key):  # The function that's called when a key is pressed
+        # logging.info("Key pressed: {0}".format(key))
+        print(key)
+        sleep(1)
+        sys.stdout.flush()
+
+    def on_release(self, key):  # The function that's called when a key is released
+        # logging.info("Key released: {0}".format(key))
+        print(key)
+        sleep(1)
+        sys.stdout.flush()
+
+    def check_window(self):
+        while(True):
+            lib = ctypes.windll.LoadLibrary('user32.dll')
+            handle = lib.GetForegroundWindow()  # 활성화된 윈도우의 핸들얻음
+            buffer = ctypes.create_unicode_buffer(255)  # 타이틀을 저장할 버퍼
+            lib.GetWindowTextW(handle, buffer, ctypes.sizeof(buffer))  # 버퍼에 타이틀 저장
+
+            if self.window.value != buffer.value:
+                print('cheat')
+                sleep(5)
+                self.dialog.hide()
+
 
 class Sign_in(QWidget):
 
@@ -259,10 +314,30 @@ class Sign_in(QWidget):
         self.hide()
 
         arr_login = client.login(id, exam_num)
+
         self.mainW.run(arr_login)
 
+
+
 if __name__ == '__main__':
+
+    '''
+    t1 = threading.Thread(target=QApplication(sys.argv))
+    t2 = threading.Thread(target=MyApp())
+    t3 = threading.Thread(target=Sign_in(MyApp()))
+    t1.start()
+    t2.start()
+    t3.start()
+    sys.exit(t2.exec_())
+    '''
     app = QApplication(sys.argv)
+
+
+
     ex = MyApp()
+    t1 = threading.Thread()
+    #t1.start()
     sign_in = Sign_in(ex)
+
+
     sys.exit(app.exec_())

@@ -38,6 +38,7 @@ def login(student_id, exam_id):
         s.send(student_id.encode())
         
         length = recvall(s,16) #길이 16의 데이터를 먼저 수신하는 것은 여기에 이미지의 길이를 먼저 받아서 이미지를 받을 때 편리하려고 하는 것이다.
+        print("length=", length)
         stringData = recvall(s, int(length))
         data = numpy.fromstring(stringData, dtype='uint8')
         decimg=cv2.imdecode(data,1)
@@ -49,16 +50,17 @@ def login(student_id, exam_id):
         start = s.recv(8)
         # 종료시간
         end = s.recv(8)
+        # 학생 이름
+        len = recvall(s, 16)
+        name = recvall(s, int(len))
         # 과목명
         subname = s.recv(40)
 
-        cv2.imshow('CLIENT',decimg)
         print("tcp client :: img receive...")
-        cv2.waitKey(0)
-        cv2.destroyAllWindows() 
         s.close()
 
-        data = list((decimg, subname.decode(), exam_date.decode(), start.decode(), end.decode()))
+        # 이미지, 과목명, 시험날짜, 시작시간, 끝시간, 학새이름
+        data = list((decimg, subname.decode(), exam_date.decode(), start.decode(), end.decode(), name.decode()))
         return data
 
 
@@ -92,10 +94,6 @@ def cheating(student_id, exam_id, error_type):
         s.close()
 
         #다시 이미지로 디코딩해서 화면에 출력. 그리고 종료
-        decimg=cv2.imdecode(data,1)
-        cv2.imshow('CLIENT',decimg)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows() 
 
 def send_clipboard(student_id, exam_id, clipboard):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -151,5 +149,3 @@ if __name__ == '__main__':
     run()
 '''
 
-
-#cheating('18011529', '1', '2')

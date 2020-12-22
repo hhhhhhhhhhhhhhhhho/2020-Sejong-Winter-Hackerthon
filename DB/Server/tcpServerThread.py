@@ -16,7 +16,7 @@ def recvall(sock, count):
         count -= len(newbuf)
     return buf
 
-def detect_cheat(sock):
+def detect_cheat(sock, serverGui):
     student_id = sock.recv(8)
     exam_id = sock.recv(1)
     error_type = sock.recv(1)
@@ -29,18 +29,16 @@ def detect_cheat(sock):
     url = 'H:\\2020Hackathon\\team\\2020-Sejong-Winter-Hackerthon\\DB\\Server\\images\\' + datetime.now().strftime('%Y%m%d%H%M%S') + '.jpg'
     print(url)
     DBconnection.store_facelog(exam_id, student_id, url, error_type, "three")
-    cv2.imshow('SERVER',decimg)
+    serverGui.add_row(exam_id.decode(), student_id.decode(), datetime.now().strftime('%Y-%m-%d %H:%M:%S'), error_type.decode(), url, '')
     cv2.imwrite(url, decimg)
     print("tcp server :: img receive...")
-    cv2.waitKey(0)
-    cv2.destroyAllWindows() 
+
 
 def send_exam_student_data(sock):
     exam_id = sock.recv(1)
     student_id = sock.recv(8)
     print(student_id.decode())
     file = DBconnection.load_studentdata(exam_id, student_id)
-    print(file[0][0])
     #String형의 이미지를 수신받아서 이미지로 변환 하고 화면에 출력
     data = cv2.imread(file[0][0], cv2.IMREAD_UNCHANGED)
 
@@ -57,13 +55,16 @@ def send_exam_student_data(sock):
     print("tcp server :: img send...")
 
     # 시험정보 넘김
-    exam_data = DBconnection.load_examdata(exam_id)
+    exam_data = DBconnection.load_examdata2(exam_id, student_id)
     # 시험날짜
     sock.send(exam_data[0][1].strftime("%Y-%m-%d").encode())
     # 시작시간
     sock.send(exam_data[0][1].strftime("%H:%M:%S").encode())
     # 종료시간
     sock.send(exam_data[0][2].strftime("%H:%M:%S").encode())
+    # 사람이름
+    sock.send(str(len(exam_data[0][3].encode())).ljust(16).encode())
+    sock.send(exam_data[0][3].encode())
     # 과목명
     sock.send(exam_data[0][0].encode())
 
@@ -71,24 +72,30 @@ def receive_clipboard(sock):
     exam_id = sock.recv(1)
     student_id = sock.recv(8)
     clipboard = sock.recv(255)
+    if clipboard == '*':
+        clipboard = ''
     DBconnection.store_clipboard(exam_id, student_id, clipboard)
 
 class TCPServerThread(threading.Thread):
-    def __init__(self, tcpServerThreads, connections, connection, clientAddress):
+    def __init__(self, tcpServerThreads, connections, connection, clientAddress, serverGui):
         threading.Thread.__init__(self)
 
         self.tcpServerThreads = tcpServerThreads
         self.connections = connections
         self.connection = connection
         self.clientAddress = clientAddress
+        self.serverGui = serverGui
 
     def run(self):
         # try:
         type = self.connection.recv(1)
+        print("type:", type.decode())
         if type.decode() == '1':
             send_exam_student_data(self.connection)
+            
         if type.decode() == '2':
-            detect_cheat(self.connection)
+            detect_cheat(self.connection, self.serverGui)
+            #self.serverGui.add_row()
         if type.decode() == '3':
             receive_clipboard(self.connection)
 
@@ -107,5 +114,4 @@ class TCPServerThread(threading.Thread):
                 self.connections[i].sendall(message.encode())
         except:
             pass
-
 

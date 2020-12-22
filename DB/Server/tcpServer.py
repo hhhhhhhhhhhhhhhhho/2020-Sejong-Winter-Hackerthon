@@ -3,7 +3,7 @@ import tcpServerThread
 import sys
 
 class TCPServer(threading.Thread):
-    def __init__(self, HOST, PORT):
+    def __init__(self, HOST, PORT, serverGui):
         threading.Thread.__init__(self)
         self.HOST = HOST
         self.PORT = PORT
@@ -15,18 +15,20 @@ class TCPServer(threading.Thread):
         self.connections = []
         self.tcpServerThreads = []
 
+        self.serverGui = serverGui
+
     def run(self):
-        try:
+        #try:       
             while True:
                 print("tcp server :: server wait...")
                 connection, clientAddress = self.serverSocket.accept()
                 self.connections.append(connection)
                 print("tcp server :: connect :", clientAddress)
-                subThread = tcpServerThread.TCPServerThread(self.tcpServerThreads, self.connections, connection, clientAddress)
+                subThread = tcpServerThread.TCPServerThread(self.tcpServerThreads, self.connections, connection, clientAddress, self.serverGui)
                 subThread.start()
                 self.tcpServerThreads.append(subThread)
-        except:
-            print("tcp server :: serverThread error")
+        # except:
+        #     print("tcp server :: serverThread error")
 
     def sendAll(self, message):
         try:

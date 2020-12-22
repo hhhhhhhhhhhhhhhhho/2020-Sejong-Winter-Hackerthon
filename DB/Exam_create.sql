@@ -9,7 +9,9 @@ USE exam;
 
 CREATE TABLE EXAM (
   id INTEGER PRIMARY KEY,
-  subject_name vARCHAR(20)
+  subject_name VARCHAR(20),
+  start_date DATETIME,
+  end_date DATETIME
 );
 
 CREATE TABLE STUDENT (
@@ -29,7 +31,7 @@ CREATE TABLE EXAM_STUDENT (
 CREATE TABLE IMAGE (
   id INTEGER PRIMARY KEY,
   student_id INTEGER,
-  file VARCHAR(40),
+  file VARCHAR(255),
   FOREIGN KEY (student_id) REFERENCES STUDENT(id)
 );
 
@@ -39,7 +41,7 @@ CREATE TABLE FACE_LOG (
   student_id INTEGER,
   time DATETIME,
   error_type INTEGER,
-  image VARCHAR(40),
+  image VARCHAR(255),
   remarks VARCHAR(20),
   FOREIGN KEY (exam_id) REFERENCES EXAM(id),
   FOREIGN KEY (student_id) REFERENCES STUDENT(id)
