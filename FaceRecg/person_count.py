@@ -2,7 +2,9 @@ import face_recognition
 import cv2
 import numpy as np
 import datetime
-
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from DB.Client import client
 from gaze_tracking import GazeTracking
 
 class Face:
@@ -74,6 +76,7 @@ class Face:
 
             if self.count>=2:
                 #사람이 두명 이상일 때
+                client.cheating('18011529', '3', '3')
                 self.zerocount=0
                 cv2.putText(self.frame, "count : "+str(self.count) ,(0,20),font,1.0,(0,0,255),1)
             elif self.count==0:
@@ -96,9 +99,7 @@ class Face:
             cv2.imshow('Video', self.frame)
             sscount+=1
 
-            if(sscount==300):
-                self.video_capture.release()
-                return
+
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -200,13 +201,16 @@ class Face:
     def hi(self):
         print(self.count)
 
-'''
-if __name__=='__main__':
-    vd = Face()
-    vd.facecheck()
-    vd.showvideo()
-'''
 def start():
     vd = Face()
     vd.facecheck()
     vd.showvideo()
+
+if __name__=='__main__':
+    vd = Face()
+    vd.facecheck()
+    vd.showvideo()
+
+
+
+
