@@ -60,6 +60,7 @@ def login(student_id, exam_id):
         data = list((decimg, subname.decode(), exam_date.decode(), start.decode(), end.decode()))
         return data
 
+
 def cheating(student_id, exam_id, error_type):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:

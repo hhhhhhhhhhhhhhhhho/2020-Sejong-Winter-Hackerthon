@@ -1,19 +1,20 @@
 import os
 import sys
-#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-#from FaceRecg import person_count
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from DB.Client import client
 import clipboard
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QMessageBox, QFrame, QLineEdit
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QGridLayout
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
-
 
 class MyApp(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        self.id = ''
+        self.pw = ''
 
         self.widget_title = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_title(self.widget_title)
@@ -142,13 +143,20 @@ class MyApp(QWidget):
 
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
-            print(data)
+            data[256] = None
+            client.send_clipboard()
             self.widget_cam.btn_start.setDisabled(True)
             print('yes')
         else:
             print('no')
 
+    def setID(self, id, num):
+        self.id = id
+        self.num = num
 
+    def run(self):
+        self.show()
+        print(self.id, self.num)
 
 class Sign_in(QWidget):
 
@@ -158,7 +166,7 @@ class Sign_in(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle('My First Application')
+        self.setWindowTitle('I SEE YOU')
         self.move(300, 300)
         self.resize(400, 200)
 
@@ -170,6 +178,7 @@ class Sign_in(QWidget):
         self.lineEdit_num.returnPressed.connect(self.log_in)
 
         self.btn_return = QPushButton('로그인', self)
+        self.btn_return.setMaximumHeight(100)
         self.btn_return.clicked.connect(self.log_in)
 
         grid = QGridLayout()
@@ -192,16 +201,24 @@ class Sign_in(QWidget):
         vbox.addStretch(1)
 
         self.setLayout(vbox)
+        self.center()
         self.show()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
     def log_in(self):
         id = self.lineEdit_ID.text()
         num = self.lineEdit_num.text()
-        print(id, num)
+        self.mainW.setID(id, num)
+
+        img = client.login(id, num)
 
         self.hide()
-        self.mainW.show()
-
+        self.mainW.run()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
