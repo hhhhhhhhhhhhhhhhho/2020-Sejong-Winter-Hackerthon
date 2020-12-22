@@ -51,9 +51,9 @@ def learning_model_classification():
     b = torch.zeros(1, requires_grad=True)
 
     # optimizer 설정
-    optimizer = optim.SGD([W, b], lr=0.0000001)
+    optimizer = optim.SGD([W, b], lr=0.001)
 
-    nb_epochs = 1000000
+    nb_epochs = 10000
     for epoch in range(nb_epochs + 1):
 
         # Cost 계산
@@ -90,7 +90,7 @@ def learning_model_classification():
     test = [[1,1.1]]
     test_data=torch.FloatTensor(test)
 
-    hypo = torch.sigmoid(test_data.matmul(W) + b) # or .mm or @
+    hypothesis = torch.sigmoid(test_data.matmul(W) + b) # or .mm or @
     predict = hypothesis >= torch.FloatTensor([0.5])
 
 
@@ -98,3 +98,5 @@ def learning_model_classification():
         print("부정행위가 감지되었습니다.")
 
 
+if __name__ == "__main__":
+    learning_model_classification()

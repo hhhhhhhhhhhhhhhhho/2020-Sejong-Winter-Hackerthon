@@ -175,11 +175,7 @@ def detection_cheat_for_eye():
             #print(left_center)
             #print(right_center)
             #print(memory_cord)
-
-
             #print(memory_cord_right)
-
-
 
             # final output
             #left_center # 완쪽 눈 중심 좌표
