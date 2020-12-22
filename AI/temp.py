@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import dlib
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import pandas as pd
 # Load the detector
 import csv
