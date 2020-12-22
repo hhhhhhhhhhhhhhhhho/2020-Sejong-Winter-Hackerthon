@@ -18,6 +18,7 @@ class Face:
         self.process_this_frame = True
         self.count = 0
         self.zerocount =0
+
     def showvideo(self):
 
         while True:
@@ -99,6 +100,7 @@ class Face:
                 break
         self.video_capture.release()
         cv2.destroyAllWindows()
+
     def facecheck(self):
         student_img = face_recognition.load_image_file("kim.jpg")
         student_face_encoding = face_recognition.face_encodings(student_img)[0]
@@ -178,6 +180,8 @@ class Face:
             # Display the resulting image
             cv2.imshow('Video', self.frame)
             if(count>=100):
+
+
                 return
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -187,8 +191,16 @@ class Face:
         self.video_capture.release()
         cv2.destroyAllWindows()
 
+    def hi(self):
+        print(self.count)
+
+'''
 if __name__=='__main__':
     vd = Face()
     vd.facecheck()
     vd.showvideo()
-
+'''
+def start():
+    vd = Face()
+    vd.facecheck()
+    vd.showvideo()
