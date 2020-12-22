@@ -187,6 +187,8 @@ class MyApp(QWidget):
             vd = person_count.Face(self.arr_info[0],self.id,self.exam_num)
             #person_count.start(self.arr_info[0])
             vd.facecheck()
+            vd.eyetracking()
+
             webbrowser.open('http://blackboard.sejong.ac.kr')
 
             sleep(1)
@@ -244,7 +246,7 @@ class MyApp(QWidget):
                 img=ImageGrab.grab()
                 imgsend = numpy.array(img)
                 #sendimg=cv2.imread(img)
-                client.cheating(self.id,self.exam_num,'3',imgsend)
+                client.cheating(self.id,self.exam_num,'4',imgsend)
 
                 dialog_window = WindowDialog()
                 dialog_window.exec()
