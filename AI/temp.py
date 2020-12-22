@@ -172,12 +172,12 @@ def detection_cheat_for_eye():
             if cv2.waitKey(1) == ord('q'):
                 break
 
-            print(left_center)
-            print(right_center)
-            print(memory_cord)
+            #print(left_center)
+            #print(right_center)
+            #print(memory_cord)
 
 
-            print(memory_cord_right)
+            #print(memory_cord_right)
 
 
 
