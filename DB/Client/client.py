@@ -23,6 +23,7 @@ def recvall(sock, count):
 
 def login(student_id, exam_id):
     print("login")
+
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
             s.connect(addr)
@@ -157,5 +158,3 @@ if __name__ == '__main__':
 
 
 #cheating('18011529', '1', '2')
-
-login('18011529', '2')

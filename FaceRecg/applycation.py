@@ -1,14 +1,14 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-#from DB.Client import client
+from DB.Client import client
 import clipboard
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
+#import person_count
 import webbrowser
-import cv2
 
 class MyApp(QWidget):
 
@@ -16,7 +16,8 @@ class MyApp(QWidget):
         super().__init__()
 
         self.id = ''
-        self.pw = ''
+        self.exam_num = ''
+        self.arr_info = []
 
         self.widget_title = QWidget(parent=self, flags=Qt.Widget)
         self.init_widget_title()
@@ -54,7 +55,7 @@ class MyApp(QWidget):
         self.frame_info.setFrameShadow(QFrame.Raised)
         self.frame_info.setLineWidth(3)
 
-        self.label_lecture = QLabel('2020년 2학기 컴퓨터구조 기말고사', self.frame_info)
+        self.label_lecture = QLabel(self.frame_info)
         font = self.label_lecture.font()
         font.setBold(True)
         font.setPointSize(16)
@@ -97,12 +98,12 @@ class MyApp(QWidget):
 
     def init_widget_cam(self):
         self.widget_cam.btn_start = QPushButton('Clear clipboard and start!')
-        #self.widget_cam.btn_start.setMaximumWidth(500)
+
         self.widget_cam.btn_start.setFixedSize(200, 50)
         self.widget_cam.btn_start.clicked.connect(self.startExam)
 
 
-        pixmap = QPixmap('winter.jpg')
+        pixmap = QPixmap('sejong.jpg')
         self.widget_cam.label_img = QLabel()
         self.widget_cam.label_img.setPixmap(pixmap)
 
@@ -155,10 +156,7 @@ class MyApp(QWidget):
         self.timer.timeout.connect(self.setCurrentTime)
         self.timer.start()
 
-        #self.setGeometry(0, 0, 800, 800)
-        #self.show()
-        self.showFullScreen()
-        #self.hide()
+        self.hide()
 
     def setCurrentTime(self):
         datetime = QDateTime.currentDateTime()
@@ -170,10 +168,12 @@ class MyApp(QWidget):
 
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
-            #client.send_clipboard()
+            client.send_clipboard(self.id, self.exam_num, data)
             self.widget_cam.btn_start.setDisabled(True)
-            print('yes')
+            print(data)
+            #person_count.start()
             webbrowser.open('http://blackboard.sejong.ac.kr')
+
         else:
             print('no')
 
@@ -188,14 +188,17 @@ class MyApp(QWidget):
         self.id = id
         self.num = num
 
-    def run(self):
-        self.show()
-        print(self.id, self.num)
+    def run(self, arr_login):
+        self.showFullScreen()
+        self.arr_info = arr_login
+        self.set_lecture()
+        self.set_duration()
 
-    def set_duration(self, start, end):
-        self.label_duration.setText("\n시험시간 : " + start + ' ~ ' + end)
+    def set_duration(self):
+        self.label_duration.setText("\n시험시간 : " + self.arr_info[3] + '~' + self.arr_info[4])
 
-
+    def set_lecture(self):
+        self.label_lecture.setText('2020년 2학기 ' + self.arr_info[1] + ' 기말고사')
 
 class Sign_in(QWidget):
 
@@ -251,17 +254,15 @@ class Sign_in(QWidget):
 
     def log_in(self):
         id = self.lineEdit_ID.text()
-        num = self.lineEdit_num.text()
-        self.mainW.setID(id, num)
-
-        #img = client.login(id, num)
-
+        exam_num = self.lineEdit_num.text()
+        self.mainW.setID(id, exam_num)
         self.hide()
-        self.mainW.run()
+
+        arr_login = client.login(id, exam_num)
+        self.mainW.run(arr_login)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyApp()
-    ex.set_duration('12:00', '13:30')
-    #sign_in = Sign_in(ex)
+    sign_in = Sign_in(ex)
     sys.exit(app.exec_())
