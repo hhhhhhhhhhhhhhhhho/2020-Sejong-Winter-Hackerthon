@@ -3,9 +3,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from DB.Client import client
 import clipboard
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
 import person_count
 import webbrowser
@@ -14,7 +13,6 @@ from time import sleep
 import threading
 import ctypes
 import numpy
-import cv2
 
 class MyApp(QWidget):
 
@@ -179,8 +177,8 @@ class MyApp(QWidget):
 
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
-            if data==None:
-                data='*'
+            if data == None:
+                data = '*'
             client.send_clipboard(self.id, self.exam_num, data)
 
             self.widget_cam.btn_start.setDisabled(True)
@@ -208,6 +206,7 @@ class MyApp(QWidget):
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
+            self.close()
             sys.exit()
 
     def setID(self, id, exam_num):
@@ -246,6 +245,10 @@ class MyApp(QWidget):
                 imgsend = numpy.array(img)
                 #sendimg=cv2.imread(img)
                 client.cheating(self.id,self.exam_num,'3',imgsend)
+
+                dialog_window = WindowDialog()
+                dialog_window.exec()
+
             sleep(10)
 
 
@@ -309,12 +312,44 @@ class Sign_in(QWidget):
         id = self.lineEdit_ID.text()
         exam_num = self.lineEdit_num.text()
         self.mainW.setID(id, exam_num)
-        self.hide()
+        self.close()
 
         arr_login = client.login(id, exam_num)
 
         self.mainW.run(arr_login)
 
+class WindowDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.setupUI()
+
+        self.id = None
+        self.password = None
+
+    def setupUI(self):
+        self.setGeometry(1100, 200, 300, 200)
+        self.setWindowTitle("Warning!")
+
+        label1 = QLabel("부정행위 식별: 다른 프로세스 접속")
+
+        #self.lineEdit1 = QLineEdit()
+        #self.lineEdit2 = QLineEdit()
+        #self.pushButton1= QPushButton("Sign In")
+        #self.pushButton1.clicked.connect(self.pushButtonClicked)
+
+        layout = QGridLayout()
+        layout.addWidget(label1, 0, 0)
+        #layout.addWidget(self.lineEdit1, 0, 1)
+        #layout.addWidget(self.pushButton1, 0, 2)
+        #layout.addWidget(label2, 1, 0)
+        #layout.addWidget(self.lineEdit2, 1, 1)
+
+        self.setLayout(layout)
+
+    def pushButtonClicked(self):
+        self.id = self.lineEdit1.text()
+        self.password = self.lineEdit2.text()
+        self.close()
 
 
 if __name__ == '__main__':
