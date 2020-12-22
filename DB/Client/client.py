@@ -8,7 +8,7 @@ import base64
 import cv2
 import numpy
 
-host = '172.16.44.88'
+host = '172.30.1.34'
 port = 9999
 addr = (host, port)
 
@@ -41,11 +41,24 @@ def login(student_id, exam_id):
         data = numpy.fromstring(stringData, dtype='uint8')
         decimg=cv2.imdecode(data,1)
 
+        
+        # 시험날짜
+        exam_date = s.recv(10)
+        # 시작시간
+        start = s.recv(8)
+        # 종료시간
+        end = s.recv(8)
+        # 과목명
+        subname = s.recv(40)
+
         cv2.imshow('CLIENT',decimg)
         print("tcp client :: img receive...")
         cv2.waitKey(0)
         cv2.destroyAllWindows() 
         s.close()
+
+        data = list((decimg, subname.decode(), exam_date.decode(), start.decode(), end.decode()))
+        return data
 
 def cheating(student_id, exam_id, error_type):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -136,6 +149,7 @@ if __name__ == '__main__':
     run()
 '''
 
+
 #cheating('18011529', '1', '2')
 
-#login('18011529', '2')
+login('18011529', '2')

@@ -23,6 +23,12 @@ def load_studentdata(exam_id, student_id):
     conn.commit()
     return curs.fetchall()
 
+def load_examdata(exam_id):
+    sql = "select subject_name, start_date, end_date from EXAM where id = %s"
+    curs.execute(sql, (exam_id))
+    conn.commit()
+    return curs.fetchall()
+
 # 클립보드 내용 저장
 def store_clipboard(exam_id, student_id, clipboard):
     sql = "update EXAM_STUDENT set clipboard=%s where exam_id = %s and student_id = %s"
@@ -35,9 +41,8 @@ def store_facelog(exam_id, student_id, image, error_type, remarks):
     curs.execute(sql, (exam_id, student_id, error_type, image, remarks))
     conn.commit()
 
-data = load_studentdata(2, 18011529)
+data = load_examdata(2)
 print(data)
-
 # store_clipboard(1, 18011529, "어쩌구저쩌구")
 
 # store_facelog(5, 18011529, "log_images/image1.jpg", 2, "three")

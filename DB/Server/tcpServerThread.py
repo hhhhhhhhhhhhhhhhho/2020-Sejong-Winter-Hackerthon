@@ -35,7 +35,7 @@ def detect_cheat(sock):
     cv2.waitKey(0)
     cv2.destroyAllWindows() 
 
-def send_student_image(sock):
+def send_exam_student_data(sock):
     exam_id = sock.recv(1)
     student_id = sock.recv(8)
     print(student_id.decode())
@@ -46,7 +46,6 @@ def send_student_image(sock):
 
     # '.jpg'means that the img of the current picture is encoded in jpg format, and the result of encoding in different formats is different.
     img_encode = cv2.imencode('.jpg', data)[1]
-    # imgg = cv2.imencode('.png', img)
 
     data_encode = numpy.array(img_encode)
     stringData = data_encode.tostring()
@@ -56,9 +55,17 @@ def send_student_image(sock):
     sock.send(stringData)
 
     print("tcp server :: img send...")
-    cv2.imshow('CLIENT',data)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows() 
+
+    # 시험정보 넘김
+    exam_data = DBconnection.load_examdata(exam_id)
+    # 시험날짜
+    sock.send(exam_data[0][1].strftime("%Y-%m-%d").encode())
+    # 시작시간
+    sock.send(exam_data[0][1].strftime("%H:%M:%S").encode())
+    # 종료시간
+    sock.send(exam_data[0][2].strftime("%H:%M:%S").encode())
+    # 과목명
+    sock.send(exam_data[0][0].encode())
 
 def receive_clipboard(sock):
     exam_id = sock.recv(1)
@@ -79,7 +86,7 @@ class TCPServerThread(threading.Thread):
         # try:
         type = self.connection.recv(1)
         if type.decode() == '1':
-            send_student_image(self.connection)
+            send_exam_student_data(self.connection)
         if type.decode() == '2':
             detect_cheat(self.connection)
         if type.decode() == '3':
