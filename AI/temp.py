@@ -7,6 +7,7 @@ import pandas as pd
 import csv
 import main # AI main
 import torch
+import tensorflow as tf
 
 detector = dlib.get_frontal_face_detector()
 
@@ -21,6 +22,7 @@ cap = cv2.VideoCapture(0)
 # img = cv2.imread("face.jpg")
 '''
 def detection_cheat_for_eye():
+    cnt = 0
     memory_cord = [(0,0)]
     memory_cord_right = [(0,0)]
     while(True):
@@ -109,7 +111,7 @@ def detection_cheat_for_eye():
             right_min_y = min(right_eye_y)
             right_lefttop = (right_min_x, right_min_y)
             right_center = ((right_max_x + right_min_x)// 2, (right_max_y + right_min_y)//2)
-            print(right_center)
+            #print(right_center)
             if not (right_center[0] <= 2 or right_center[1] <= 2) :
                 cv2.circle(img=frame, center=right_center, radius=1, color=(0, 255, 0), thickness=-1)
             '''
@@ -163,10 +165,10 @@ def detection_cheat_for_eye():
             # show the image
             cv2.imshow(winname="Face", mat=frame)
 
-            cv2.imshow(winname="your_left_eye", mat=left_eye_im)
-            cv2.imshow(winname="your_left_eye_thresholded", mat=left_eye_im * (np.expand_dims((left_eye_im.sum(axis=2)//3), axis=2) < T))
-            cv2.imshow(winname="your_right_eye", mat=right_eye_im)
-            cv2.imshow(winname="your_right_eye_thresholded", mat=right_eye_im * (np.expand_dims((right_eye_im.sum(axis=2)//3), axis=2) < T))
+            #cv2.imshow(winname="your_left_eye", mat=left_eye_im)
+            #cv2.imshow(winname="your_left_eye_thresholded", mat=left_eye_im * (np.expand_dims((left_eye_im.sum(axis=2)//3), axis=2) < T))
+            #cv2.imshow(winname="your_right_eye", mat=right_eye_im)
+            #cv2.imshow(winname="your_right_eye_thresholded", mat=right_eye_im * (np.expand_dims((right_eye_im.sum(axis=2)//3), axis=2) < T))
 
 
             if cv2.waitKey(1) == ord('q'):
@@ -187,22 +189,28 @@ def detection_cheat_for_eye():
             # 사람이 존재하지 않을 때 아예 데이터를 수집하지 않고, 부정행위 여부를 판단하지 않는 등의 판단이 필요함.
 
             ''' 학습 시킬 때 활성 화 '''
-            f = open('write.csv', 'a', newline='')
-            wr = csv.writer(f)
-            wr.writerow([((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2,((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2 ,0])
+            #f = open('write.csv', 'a', newline='')
+            #wr = csv.writer(f)
+            #wr.writerow([((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2,((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2 ,0])
             test_x = ((left_center[0]-memory_cord[-1][0])+(right_center[0]-memory_cord_right[-1][0]))/2
             test_y = ((left_center[1]-memory_cord[-1][1])+(right_center[1]-memory_cord_right[-1][1]))/2
 
             test = [[test_x, test_y]]
-            print(test)
+            #print(test)
             test_data = torch.FloatTensor(test)
-
-            main.classification.hypothesis = torch.sigmoid(test_data.matmul(main.classification.W) + main.classification.b)  # or .mm or @
+            W = torch.FloatTensor([[0.0897],[-0.0041]])
+            #W = tf.constant([[0.0897],[-0.0041]])
+            b = torch.FloatTensor([0.8373])
+            #b = tf.constant([0.8373])
+            main.classification.hypothesis = torch.sigmoid(test_data.matmul(W) + b)  # or .mm or @
             predict = main.classification.hypothesis >= torch.FloatTensor([0.5])
 
-            if (predict == 1):
-                print(main.classification.W,main.classification.b)
-                #print("부정행위가 감지되었습니다.")
+            if (predict == 0):
+                cnt=cnt+1
+                #print(main.classification.W,main.classification.b)
+                if(cnt==15):
+                    print("부정행위가 감지되었습니다.")
+                    cnt=0
 
 
     # Close all windows
