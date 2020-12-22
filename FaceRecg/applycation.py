@@ -9,7 +9,7 @@ from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor, QPixmap
 import person_count
 import webbrowser
-from pynput.keyboard import Listener
+
 from time import sleep
 import threading
 import ctypes
@@ -178,10 +178,14 @@ class MyApp(QWidget):
 
         if reply == QMessageBox.Yes:
             data = clipboard.clear_clipboard()
+            if data==None:
+                data='*'
             client.send_clipboard(self.id, self.exam_num, data)
+
             self.widget_cam.btn_start.setDisabled(True)
+            print(123)
             print(data)
-            person_count.start()
+            person_count.start(self.arr_info[0])
             webbrowser.open('http://blackboard.sejong.ac.kr')
 
             sleep(1)
