@@ -140,11 +140,14 @@ class Face:
                         count+=13
                         known_face_names = [str(count) + "%"]
                         name = known_face_names[best_match_index]
+
+
                     self.face_names.append(name)
 
             self.process_this_frame = not self.process_this_frame
 
             # Display the results
+            boxcheck=0
             for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
                 # Scale back up face locations since the frame we detected in was scaled to 1/4 size
                 top *= 4
@@ -159,7 +162,19 @@ class Face:
                 cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
                 font = cv2.FONT_HERSHEY_DUPLEX
                 cv2.putText(self.frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-
+                if(name=="Unknown"):
+                    cv2.rectangle(self.frame, (left, top), (right, bottom), (0, 0, 255), 2)
+                    cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                    font = cv2.FONT_HERSHEY_DUPLEX
+                    cv2.putText(self.frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                else:
+                    cv2.rectangle(self.frame, (left, top), (right, bottom), (0, 255, 0), 2)
+                    cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
+                    font = cv2.FONT_HERSHEY_DUPLEX
+                    cv2.putText(self.frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                boxcheck=1
+            if(boxcheck==0):
+                count=0
             # Display the resulting image
             cv2.imshow('Video', self.frame)
             if(count>=100):
