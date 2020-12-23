@@ -23,4 +23,7 @@
 
 
 ## Fine  
-![image](/etc/효경 태정 해커톤 인증사진.png)
+![image](/etc/picture1.png)
+![image](/etc/picture2.jpeg)
+![image](/etc/picture3.jpeg)
+
