@@ -25,6 +25,7 @@ class Face:
         self.id = id
         self.exam = exam
 
+
     def eyetracking(self):
         detector = dlib.get_frontal_face_detector()
 
@@ -144,10 +145,13 @@ class Face:
 
                 ''' 임의로 정한 부정행위 값'''
                 if abs(test_x) > 1.7 and abs(test_y) > 1.85:
+
                     cnt = cnt + 1
                     # print(main.classification.W,main.classification.b)
                     if (cnt == 10):
+                        font = cv2.FONT_HERSHEY_DUPLEX
                         client.cheating(self.id,self.exam,'1',self.frame)
+
                         print("부정행위가 감지되었습니다.")
                         cnt = 0
 
@@ -277,7 +281,7 @@ class Face:
 
             if self.count>=2:
                 #사람이 두명 이상일 때
-                client.cheating(self.id, self.exam, '2',self.frame)
+                #client.cheating(self.id, self.exam, '2',self.frame)
                 self.zerocount=0
                 cv2.putText(self.frame, "count : "+str(self.count) ,(0,20),font,1.0,(0,0,255),1)
             elif self.count==0:

@@ -182,12 +182,8 @@ class MyApp(QWidget):
             client.send_clipboard(self.id, self.exam_num, data)
 
             self.widget_cam.btn_start.setDisabled(True)
-            print(123)
-            print(data)
             vd = person_count.Face(self.arr_info[0],self.id,self.exam_num)
-            #person_count.start(self.arr_info[0])
             vd.facecheck()
-            vd.eyetracking()
 
             webbrowser.open('http://blackboard.sejong.ac.kr')
 
@@ -199,7 +195,7 @@ class MyApp(QWidget):
 
             window_thread = threading.Thread(target=self.check_window)
             window_thread.start()
-            vd.showvideo()
+            vd.eyetracking()
         else:
             print('no')
 
@@ -245,11 +241,8 @@ class MyApp(QWidget):
                 sleep(1)
                 img=ImageGrab.grab()
                 imgsend = numpy.array(img)
-                #sendimg=cv2.imread(img)
                 client.cheating(self.id,self.exam_num,'4',imgsend)
 
-                dialog_window = WindowDialog()
-                dialog_window.exec()
 
             sleep(10)
 
