@@ -1,0 +1,3 @@
+
+
+requirements로 가상환경에 모듈 설치하고 FaceRecg폴더안에 person_count.py런하면됩니다.
