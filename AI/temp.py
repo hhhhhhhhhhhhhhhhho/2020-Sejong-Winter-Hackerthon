@@ -195,7 +195,7 @@ def detection_cheat_for_eye():
 
 
             ''' 임의로 정한 부정행위 값'''
-            if abs(test_x) > 2 and abs(test_y) > 2:
+            if abs(test_x) > 1.85 and abs(test_y) > 1.85:
                 cnt = cnt + 1
                 # print(main.classification.W,main.classification.b)
                 if (cnt == 3):
