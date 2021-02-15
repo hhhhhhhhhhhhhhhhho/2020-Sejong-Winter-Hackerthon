@@ -27,3 +27,6 @@
 ![image](/etc/picture2.jpeg)
 ![image](/etc/picture3.jpeg)
 
+
+## Ideation
+### 1. pyaudio 음성 / 노이즈 분리 -> n 초 이상 사람 목소리 감지시 부정행위 감지 .
